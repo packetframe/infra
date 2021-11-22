@@ -17,6 +17,7 @@ services:
       - api_db
     environment:
       - DB_HOST=api_db
+      - METRICS_LISTEN=:8081
 
   orchestrator:
     image: "ghcr.io/packetframe/orchestrator:{{ config.controlplane.versions.docker.api }}"
@@ -25,6 +26,7 @@ services:
     environment:
       - DB_HOST=api_db
       - CACHE_DIR=/tmp/pfcache/
+      - METRICS_LISTEN=:8081
 
   api_db:
     image: "postgres:{{ config.controlplane.versions.docker.postgres }}"
