@@ -10,6 +10,14 @@
     src: "{{ item }}"
   loop: "{{ config.root_acl }}"
 
+- name: Allow HTTP(S)
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+  loop:
+    - 80
+    - 443
+
 - name: Set default deny
   ufw:
     state: enabled
