@@ -1,0 +1,22 @@
+{
+  email info@packetframe.com
+}
+
+v4.packetframe.com {
+  root * /etc/caddy/public/
+  file_server
+  encode gzip
+
+  route /api/* {
+    uri strip_prefix /api
+    reverse_proxy api:8080
+  }
+
+  log {
+    output file /var/log/caddy.log {
+      roll_size 1gb
+      roll_keep 1
+      roll_keep_for 7d
+    }
+  }
+}

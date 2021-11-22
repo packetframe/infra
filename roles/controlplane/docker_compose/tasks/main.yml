@@ -4,12 +4,29 @@
     state: directory
   loop:
     - /opt/packetframe/docker/api_db
-    - /opt/packetframe/docker/public_www
+    - /opt/packetframe/docker/caddy/public/
+    - /opt/packetframe/docker/caddy/data/
 
 - name: Copy docker-compose file
   template:
     src: docker-compose.yml
     dest: /opt/packetframe/docker/docker-compose.yml
+
+- name: Copy Caddyfile
+  template:
+    src: Caddyfile
+    dest: /opt/packetframe/docker/caddy/Caddyfile
+
+- name: Create empty log file
+  copy:
+    content: ""
+    dest: /opt/packetframe/docker/caddy/log.txt
+
+- name: Download frontend
+  unarchive:
+    src: "https://github.com/packetframe/web/releases/download/v{{ config.controlplane.versions.archives.web }}/packetframe-web-v{{ config.controlplane.versions.archives.web }}.tar.gz"
+    dest: /opt/packetframe/docker/caddy/public/
+    remote_src: yes
 
 - name: Bring docker-compose up
   docker_compose:

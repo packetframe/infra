@@ -1,14 +1,27 @@
 version: "3.3"
 services:
+  caddy:
+    image: "caddy:{{ config.controlplane.versions.docker.caddy }}"
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /opt/packetframe/docker/caddy/data/:/data
+      - /opt/packetframe/docker/caddy/public/:/etc/caddy/public/
+      - /opt/packetframe/docker/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /opt/packetframe/docker/caddy/log.txt:/var/log/caddy.log
+
   api:
     image: "ghcr.io/packetframe/api:{{ config.controlplane.versions.docker.api }}"
     depends_on:
       - api_db
+    environment:
+      - DB_HOST=api_db
 
   api_db:
     image: "postgres:{{ config.controlplane.versions.docker.postgres }}"
     volumes:
-      - /opt/packetframe/api_db:/var/lib/postgresql
+      - /opt/packetframe/docker/api_db:/var/lib/postgresql
     environment:
       - POSTGRES_USER=api
       - POSTGRES_PASSWORD=api
