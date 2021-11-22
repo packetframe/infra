@@ -20,6 +20,7 @@
 - name: Create empty log file
   copy:
     content: ""
+    force: no # Only create if the file doesn't exist
     dest: /opt/packetframe/docker/caddy/log.txt
 
 - name: Download frontend
