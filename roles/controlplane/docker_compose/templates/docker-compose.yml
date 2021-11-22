@@ -18,6 +18,14 @@ services:
     environment:
       - DB_HOST=api_db
 
+  orchestrator:
+    image: "ghcr.io/packetframe/orchestrator:{{ config.controlplane.versions.docker.api }}"
+    depends_on:
+      - api_db
+    environment:
+      - DB_HOST=api_db
+      - CACHE_DIR=/tmp/pfcache/
+
   api_db:
     image: "postgres:{{ config.controlplane.versions.docker.postgres }}"
     volumes:
