@@ -1,0 +1,17 @@
+- name: Install ufw
+  apt:
+    name: ufw
+    state: present
+
+- name: Allow from management IPs
+  ufw:
+    rule: allow
+    port: "22"
+    src: "{{ item }}"
+  loop: "{{ config.root_acl }}"
+
+- name: Set default deny
+  ufw:
+    state: enabled
+    policy: deny
+    logging: "off"

@@ -1,0 +1,42 @@
+- name: Install dependencies
+  apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg
+
+- name: Download docker GPG key
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+- name: Add docker repo
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ config.controlplane.versions.debian }} stable"
+    state: present
+
+- name: Install docker packages
+  apt:
+    update_cache: yes
+    pkg:
+      - docker-ce
+      - docker-ce-cli
+      - containerd.io
+      - docker-compose
+
+- name: Enable IPv6 support
+  copy:
+    content: |
+      {
+        "ipv6": true,
+        "fixed-cidr-v6": "fe00:ddd3:91b6::/64"
+      }
+    dest: /etc/docker/daemon.json
+  register: ipv6_config
+
+- name: Reload docker to apply IPv6 config
+  systemd:
+    name: docker
+    state: reloaded
+  when: ipv6_config.changed

@@ -1,0 +1,15 @@
+version: "3.3"
+services:
+  api:
+    image: "ghcr.io/packetframe/api:{{ config.controlplane.versions.docker.api }}"
+    depends_on:
+      - api_db
+
+  api_db:
+    image: "postgres:{{ config.controlplane.versions.docker.postgres }}"
+    volumes:
+      - /opt/packetframe/api_db:/var/lib/postgresql
+    environment:
+      - POSTGRES_USER=api
+      - POSTGRES_PASSWORD=api
+      - POSTGRES_DB=api

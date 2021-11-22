@@ -1,0 +1,18 @@
+- name: Create datastore directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - /opt/packetframe/docker/api_db
+    - /opt/packetframe/docker/public_www
+
+- name: Copy docker-compose file
+  template:
+    src: docker-compose.yml
+    dest: /opt/packetframe/docker/docker-compose.yml
+
+- name: Bring docker-compose up
+  docker_compose:
+    project_src: /opt/packetframe/docker/
+    files:
+      - docker-compose.yml
