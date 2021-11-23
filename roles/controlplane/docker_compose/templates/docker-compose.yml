@@ -21,11 +21,13 @@ services:
 
   orchestrator:
     image: "ghcr.io/packetframe/orchestrator:{{ config.controlplane.versions.docker.api }}"
+    volumes:
+      - /opt/packetframe/docker/zones/:/data
     depends_on:
       - api_db
     environment:
       - DB_HOST=api_db
-      - CACHE_DIR=/tmp/pfcache/
+      - CACHE_DIR=/data
       - METRICS_LISTEN=:8081
 
   api_db:
