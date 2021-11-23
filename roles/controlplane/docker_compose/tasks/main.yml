@@ -3,9 +3,10 @@
     path: "{{ item }}"
     state: directory
   loop:
-    - /opt/packetframe/docker/api_db
+    - /opt/packetframe/docker/api_db/
     - /opt/packetframe/docker/caddy/public/
     - /opt/packetframe/docker/caddy/data/
+    - /opt/packetframe/docker/prometheus/data/
 
 - name: Copy docker-compose file
   template:
@@ -16,6 +17,11 @@
   template:
     src: Caddyfile
     dest: /opt/packetframe/docker/caddy/Caddyfile
+
+- name: Copy prometheus.yml
+  template:
+    src: prometheus.yml
+    dest: /opt/packetframe/docker/prometheus/prometheus.yml
 
 - name: Create empty log file
   copy:
