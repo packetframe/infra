@@ -4,3 +4,4 @@
     - role: "./roles/common/firewall"
     - role: "./roles/common/auth"
     - role: "./roles/edge/system"
+    - role: "./roles/edge/coredns"

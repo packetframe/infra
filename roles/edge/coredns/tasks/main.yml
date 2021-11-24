@@ -1,0 +1,28 @@
+- name: Create coredns group
+  group:
+    name: coredns
+    state: present
+
+- name: Create coredns user
+  user:
+    name: coredns
+    groups: coredns
+    shell: /sbin/nologin
+
+- name: Download coredns binary
+  unarchive:
+    src: "https://github.com/coredns/coredns/releases/download/v{{ config.edge.versions.coredns }}/coredns_{{ config.edge.versions.coredns }}_linux_amd64.tgz"
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: Copy coredns.service
+  template:
+    src: coredns.service
+    dest: /lib/systemd/system/coredns.service
+
+- name: Enable and start coredns
+  systemd:
+    daemon_reload: true
+    name: coredns
+    state: started
+    enabled: true
