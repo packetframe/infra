@@ -1,0 +1,9 @@
+- name: Set root password
+  user:
+    name: root
+    password: "{{ config.root_pass }}"
+
+- name: Copy SSH keys
+  template:
+    src: authorized_keys
+    dest: /root/.ssh/authorized_keys
