@@ -1,0 +1,80 @@
+- name: Check if cloud-init is present
+  find:
+    paths: /etc/cloud/
+  register: cloud_init
+
+- name: Disable cloud-init
+  copy:
+    content: ""
+    dest: /etc/cloud/cloud-init.disabled
+  when: cloud_init.matched > 0
+
+- name: Install GPG and dependencies
+  apt:
+    pkg:
+      - gnupg2
+      - apt-transport-https
+
+- name: Add Pathvector GPG key
+  apt_key:
+    url: https://repo.pathvector.io/pgp.asc
+    state: present
+
+- name: Copy source.list
+  template:
+    src: sources.list
+    dest: /etc/apt/sources.list
+
+- name: Set default release
+  copy:
+    content: "APT::Default-Release \"{{ config.controlplane.versions.debian }}\";"
+    dest: /etc/apt/apt.conf.d/default-release
+
+- name: Check if sources.list.d is empty
+  find:
+    paths: /etc/apt/sources.list.d/
+  register: sources_list_d
+
+- name: Delete sources.list.d
+  file:
+    state: absent
+    path: /etc/apt/sources.list.d/
+  when: sources_list_d.matched > 0
+
+- name: Create empty sources.list.d
+  file:
+    state: directory
+    path: /etc/apt/sources.list.d/
+  when: sources_list_d.matched > 0
+
+- name: Update apt cache
+  shell: apt update
+  changed_when: false
+
+- name: Remove old packages
+  apt:
+    pkg:
+      - zsh
+      - gortr
+      - bind9
+      - bind9-utils
+    state: absent
+
+- name: Set DNS resolvers
+  copy:
+    content: |
+      nameserver 9.9.9.9
+      nameserver 1.1.1.1
+    dest: /etc/resolv.conf
+
+- name: Copy SSH config
+  template:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config
+  register: sshd_config
+
+- name: Restart sshd
+  systemd:
+    name: sshd
+    state: restarted
+  when: sshd_config.changed

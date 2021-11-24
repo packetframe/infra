@@ -1,0 +1,9 @@
+deb https://deb.debian.org/debian/ {{ config.controlplane.versions.debian }} main contrib
+deb-src https://deb.debian.org/debian/ {{ config.controlplane.versions.debian }}-updates main contrib
+
+deb https://security.debian.org/debian-security {{ config.controlplane.versions.debian }}-security main
+deb-src https://security.debian.org/debian-security {{ config.controlplane.versions.debian }}-security main
+
+deb https://deb.debian.org/debian {{ config.controlplane.versions.debian }}-backports main contrib
+
+deb https://repo.pathvector.io/apt/ stable main

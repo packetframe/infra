@@ -1,0 +1,6 @@
+- name: Edge install
+  hosts: edge
+  roles:
+    - role: "./roles/common/firewall"
+    - role: "./roles/common/auth"
+    - role: "./roles/edge/system"
