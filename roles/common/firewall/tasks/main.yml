@@ -10,13 +10,22 @@
     src: "{{ item }}"
   loop: "{{ config.root_acl }}"
 
-- name: Allow HTTP(S)
+- name: Allow control plane ports
   ufw:
     rule: allow
     port: "{{ item }}"
   loop:
     - 80
     - 443
+  when: "'controlplane' in group_names"
+
+- name: Allow edge ports
+  ufw:
+    rule: allow
+    port: "{{ item }}"
+  loop:
+    - 53
+  when: "'edge' in group_names"
 
 - name: Set default deny
   ufw:
