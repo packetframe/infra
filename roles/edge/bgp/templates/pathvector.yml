@@ -1,0 +1,3 @@
+{{ config.edge.bgp | to_nice_yaml }}
+peers:
+  {{ peers | to_nice_yaml }}

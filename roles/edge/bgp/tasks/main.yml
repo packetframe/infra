@@ -1,0 +1,23 @@
+- name: Install BGP packages
+  apt:
+    pkg:
+      - bird2={{ config.edge.versions.apt.bird2 }}
+      - pathvector={{ config.edge.versions.apt.pathvector }}
+
+- name: Copy Pathvector config
+  template:
+    src: pathvector.yml
+    dest: /etc/pathvector.yml
+  register: pathvector_config
+
+- name: Generate Pathvector output
+  shell: pathvector generate
+  when: pathvector_config.changed
+
+- name: Add crontab entry
+  cron:
+    name: Pathvector generate
+    user: root
+    job: pathvector generate
+    minute: 0
+    hour: "*/12"
