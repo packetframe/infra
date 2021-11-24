@@ -3,10 +3,9 @@
     name: ufw
     state: present
 
-- name: Allow from management IPs
+- name: Allow anything from management IPs
   ufw:
     rule: allow
-    port: "22"
     src: "{{ item }}"
   loop: "{{ config.root_acl }}"
 
