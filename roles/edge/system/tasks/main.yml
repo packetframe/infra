@@ -1,3 +1,7 @@
+- name: Set timezone
+  timezone:
+    name: America/Los_Angeles
+
 - name: Check if cloud-init is present
   find:
     paths: /etc/cloud/
