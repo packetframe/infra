@@ -88,3 +88,10 @@
     name: sshd
     state: restarted
   when: sshd_config.changed
+
+- name: Create datastore directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - /opt/packetframe/dns/zones/
