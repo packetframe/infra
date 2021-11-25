@@ -59,6 +59,7 @@
   apt:
     pkg:
       - mtr-tiny={{ config.edge.versions.apt.mtr }}
+      - rsync={{ config.edge.versions.apt.rsync }}
     state: present
 
 - name: Remove old packages
