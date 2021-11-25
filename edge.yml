@@ -5,3 +5,4 @@
     - role: "./roles/common/auth"
     - role: "./roles/edge/system"
     - role: "./roles/edge/coredns"
+    - role: "./roles/edge/bgp"

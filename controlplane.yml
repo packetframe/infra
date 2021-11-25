@@ -1,6 +1,6 @@
 - name: Control plane install
   hosts: controlplane
   roles:
-#    - role: "./roles/common/firewall"
-#    - role: "./roles/common/install_docker"
+    - role: "./roles/common/firewall"
+    - role: "./roles/common/install_docker"
     - role: "./roles/controlplane/docker_compose"
