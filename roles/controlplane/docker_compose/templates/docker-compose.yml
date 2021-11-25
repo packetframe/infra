@@ -40,7 +40,7 @@ services:
       - POSTGRES_DB=api
 
   prometheus:
-    image: "prom/prometheus:{{ config.controlplane.versions.docker.prometheus }}"
+    image: "prom/prometheus:v{{ config.controlplane.versions.docker.prometheus }}"
     user: root
     ports:
       - 127.0.0.1:9090:9090
