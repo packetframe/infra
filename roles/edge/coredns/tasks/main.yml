@@ -20,6 +20,17 @@
     src: coredns.service
     dest: /lib/systemd/system/coredns.service
 
+- name: Copy builder.sh
+  template:
+    src: builder.sh
+    dest: /opt/packetframe/dns/builder.sh
+    mode: +x
+  register: corefile_builder
+
+- name: Run Corefile builder
+  shell: /opt/packetframe/dns/builder.sh
+  when: corefile_builder.changed
+
 - name: Enable and start coredns
   systemd:
     daemon_reload: true
