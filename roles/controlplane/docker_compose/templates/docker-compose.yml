@@ -13,6 +13,8 @@ services:
 
   api:
     image: "ghcr.io/packetframe/api:{{ config.controlplane.versions.docker.api }}"
+    ports:
+      - 127.0.0.1:8080:8080
     depends_on:
       - api_db
     environment:
@@ -32,6 +34,8 @@ services:
 
   api_db:
     image: "postgres:{{ config.controlplane.versions.docker.postgres }}"
+    ports:
+      - 127.0.0.1:5432:5432
     volumes:
       - /opt/packetframe/docker/api_db:/var/lib/postgresql/data
     environment:
