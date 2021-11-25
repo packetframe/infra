@@ -55,6 +55,12 @@
   shell: apt update
   changed_when: false
 
+- name: Install utilities
+  apt:
+    pkg:
+      - mtr-tiny={{ config.edge.versions.apt.mtr }}
+    state: present
+
 - name: Remove old packages
   apt:
     pkg:
