@@ -60,7 +60,7 @@
     pkg:
       - mtr-tiny={{ config.edge.versions.apt.mtr }}
       - rsync={{ config.edge.versions.apt.rsync }}
-      - knot-dnsutils={{ config.edge.versions.apt.knot-dnsutils }}
+      - knot-dnsutils={{ config.edge.versions.apt["knot-dnsutils"] }}
     state: present
 
 - name: Remove old packages
