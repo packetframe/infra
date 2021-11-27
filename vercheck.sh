@@ -1,6 +1,8 @@
 #!/bin/bash
 # vercheck.sh Packetframe control plane version checker
 
+# TODO: Add docker tag checker
+
 symverlt() {
     [ "$1" = "$2" ] && return 1 || [  "$1" = "`echo -e "$1\n$2" | sort -V | head -n1`" ]
 }
@@ -14,4 +16,10 @@ LATEST_WEB_VERSION=$(curl https://api.github.com/repos/packetframe/web/releases/
 symverlt $API_VERSION $LATEST_API_VERSION && echo "API out of date ($API_VERSION < $LATEST_API_VERSION)" || echo "API version up to date ($API_VERSION)"
 symverlt $WEB_VERSION $LATEST_WEB_VERSION && echo "Web out of date ($WEB_VERSION < $LATEST_WEB_VERSION)" || echo "Web version up to date ($WEB_VERSION)"
 
-# TODO: Add docker tag checker
+if [[ "$1" == "fix" ]]; then
+  echo "Fixing..."
+  sed -i "s/api: $API_VERSION/api: $LATEST_API_VERSION/" hosts.yml
+  sed -i "s/web: $WEB_VERSION/web: $LATEST_WEB_VERSION/" hosts.yml
+  symverlt $API_VERSION $LATEST_API_VERSION && echo "API out of date ($API_VERSION < $LATEST_API_VERSION)" || echo "API version up to date ($API_VERSION)"
+  symverlt $WEB_VERSION $LATEST_WEB_VERSION && echo "Web out of date ($WEB_VERSION < $LATEST_WEB_VERSION)" || echo "Web version up to date ($WEB_VERSION)"
+fi
