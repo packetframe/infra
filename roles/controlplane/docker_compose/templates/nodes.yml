@@ -1,0 +1,4 @@
+nodes:
+  {% for host in groups["edge"] %}
+  {{ host }}: {{ hostvars[host]["ansible_host"] }}
+  {% endfor %}

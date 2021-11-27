@@ -1,4 +1,4 @@
-Port 34553
+Port {{ config.edge.ssh.port }}
 AddressFamily any
 ListenAddress 0.0.0.0
 ListenAddress ::
