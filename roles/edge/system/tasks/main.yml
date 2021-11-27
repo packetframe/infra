@@ -91,6 +91,17 @@
     state: restarted
   when: sshd_config.changed
 
+- name: Copy net.sh
+  template:
+    src: net.sh
+    dest: /opt/packetframe/net.sh
+    mode: +x
+  register: net_sh
+
+- name: Apply network configuration
+  shell: /opt/packetframe/net.sh
+  when: net_sh.changed
+
 - name: Create datastore directories
   file:
     path: "{{ item }}"
