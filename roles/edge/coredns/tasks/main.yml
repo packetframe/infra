@@ -9,6 +9,11 @@
     groups: coredns
     shell: /sbin/nologin
 
+- name: Create DNS directory
+  file:
+    path: /opt/packetframe/dns/zones/
+    state: directory
+
 - name: Download coredns binary
   unarchive:
     src: "https://github.com/coredns/coredns/releases/download/v{{ config.edge.versions.coredns }}/coredns_{{ config.edge.versions.coredns }}_linux_amd64.tgz"

@@ -7,7 +7,7 @@
     - /opt/packetframe/docker/caddy/public/
     - /opt/packetframe/docker/caddy/data/
     - /opt/packetframe/docker/prometheus/data/
-    - /opt/packetframe/docker/zones/
+    - /opt/packetframe/docker/orchestrator_cache/zones/
 
 - name: Copy docker-compose file
   template:

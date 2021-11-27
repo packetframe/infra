@@ -25,7 +25,7 @@ services:
   orchestrator:
     image: "ghcr.io/packetframe/orchestrator:{{ config.controlplane.versions.docker.api }}"
     volumes:
-      - /opt/packetframe/docker/zones/:/data
+      - /opt/packetframe/docker/orchestrator_cache/:/data
       - /root/.ssh/packetframe:/ssh-key
       - /opt/packetframe/docker/nodes.yml:/nodes.yml
     depends_on:
