@@ -1,11 +1,7 @@
 (pf_default) {
   nsid {{ inventory_hostname }}
-}
-
-. {
-  import pf_default
   reload 10s
-  prometheus localhost:9253
+  prometheus {{ ansible_host }}:9253
   bind 127.34.55.3
 }
 
