@@ -23,6 +23,11 @@
   template:
     src: prometheus.yml
     dest: /opt/packetframe/docker/prometheus/prometheus.yml
+  register: prometheus_config
+
+- name: Reload prometheus
+  shell: docker-compose -f /opt/packetframe/docker/docker-compose.yml restart prometheus
+  when: prometheus_config.changed
 
 - name: Copy nodes.yml
   template:
