@@ -1,0 +1,9 @@
+edge_versions:
+  debian: bullseye
+  coredns: 1.8.6
+  apt:
+    pathvector: 5.6.1
+    bird2: 2.0.8-2~bpo11+1
+    mtr: 0.94-1+deb11u1
+    rsync: 3.2.3-4+deb11u1
+    knot-dnsutils: 3.0.5-1

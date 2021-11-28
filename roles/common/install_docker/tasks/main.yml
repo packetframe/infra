@@ -13,7 +13,7 @@
 
 - name: Add docker repo
   apt_repository:
-    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ config.controlplane.versions.debian }} stable"
+    repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ controlplane_versions.debian }} stable"
     state: present
 
 - name: Install docker packages

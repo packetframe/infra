@@ -1,8 +1,11 @@
 - name: Edge install
-  hosts: edge
+  hosts: fmt2
+  vars_files:
+    - config/edge-bgp.yml
+    - config/edge-versions.yml
   roles:
     - role: "./roles/common/firewall"
     - role: "./roles/common/auth"
-    - role: "./roles/edge/system"
     - role: "./roles/edge/coredns"
+    - role: "./roles/edge/system"
     - role: "./roles/edge/bgp"

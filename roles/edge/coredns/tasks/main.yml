@@ -16,7 +16,7 @@
 
 - name: Download coredns binary
   unarchive:
-    src: "https://github.com/coredns/coredns/releases/download/v{{ config.edge.versions.coredns }}/coredns_{{ config.edge.versions.coredns }}_linux_amd64.tgz"
+    src: "https://github.com/coredns/coredns/releases/download/v{{ edge_versions.coredns }}/coredns_{{ edge_versions.coredns }}_linux_amd64.tgz"
     dest: /usr/local/bin
     remote_src: yes
 

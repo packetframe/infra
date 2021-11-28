@@ -1,7 +1,7 @@
 version: "3.3"
 services:
   caddy:
-    image: "caddy:{{ config.controlplane.versions.docker.caddy }}"
+    image: "caddy:{{ controlplane_versions.docker.caddy }}"
     ports:
       - 80:80
       - 443:443
@@ -12,7 +12,7 @@ services:
       - /opt/packetframe/docker/caddy/log.txt:/var/log/caddy.log
 
   api:
-    image: "ghcr.io/packetframe/api:{{ config.controlplane.versions.docker.api }}"
+    image: "ghcr.io/packetframe/api:{{ controlplane_versions.docker.api }}"
     ports:
       - 127.0.0.1:8080:8080
     depends_on:
@@ -23,7 +23,7 @@ services:
       - RPC_SERVER=http://orchestrator:8080
 
   orchestrator:
-    image: "ghcr.io/packetframe/orchestrator:{{ config.controlplane.versions.docker.api }}"
+    image: "ghcr.io/packetframe/orchestrator:{{ controlplane_versions.docker.api }}"
     volumes:
       - /opt/packetframe/docker/orchestrator_cache/:/data
       - /root/.ssh/packetframe:/ssh-key
@@ -42,7 +42,7 @@ services:
       - NS2_HOSTNAME=ns2v4
 
   api_db:
-    image: "postgres:{{ config.controlplane.versions.docker.postgres }}"
+    image: "postgres:{{ controlplane_versions.docker.postgres }}"
     ports:
       - 127.0.0.1:5432:5432
     volumes:
@@ -53,7 +53,7 @@ services:
       - POSTGRES_DB=api
 
   prometheus:
-    image: "prom/prometheus:v{{ config.controlplane.versions.docker.prometheus }}"
+    image: "prom/prometheus:v{{ controlplane_versions.docker.prometheus }}"
     user: root
     ports:
       - 127.0.0.1:9090:9090

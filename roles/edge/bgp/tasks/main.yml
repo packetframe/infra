@@ -1,8 +1,8 @@
 - name: Install BGP packages
   apt:
     pkg:
-      - bird2={{ config.edge.versions.apt.bird2 }}
-      - pathvector={{ config.edge.versions.apt.pathvector }}
+      - bird2={{ edge_versions.apt.bird2 }}
+      - pathvector={{ edge_versions.apt.pathvector }}
 
 - name: Copy Pathvector config
   template:

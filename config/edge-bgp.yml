@@ -1,0 +1,48 @@
+edge_bgp: # Content of this key is inserted before the node specific peers block
+  asn: 34553
+  router-id: 66.248.234.1
+  prefixes:
+    - 66.248.234.0/24
+    - 2602:809:3004::/48
+  default-route: false
+  accept-default: true
+  templates:
+    upstream:
+      allow-local-as: true
+      announce-communities: [ "34553,15" ]
+      remove-all-communities: 34553
+      local-pref: 80
+      import-communities: [ "34553,12" ]
+      filter-prefix-length: false # TODO: Fix https://github.com/natesales/pathvector/issues/61
+
+    routeserver:
+      filter-transit-asns: true
+      auto-import-limits: true
+      enforce-peer-nexthop: false
+      enforce-first-as: false
+      announce-communities: [ "34553,15" ]
+      remove-all-communities: 34553
+      local-pref: 90
+      import-communities: [ "34553,13" ]
+
+    peer:
+      filter-irr: true
+      filter-transit-asns: true
+      auto-import-limits: true
+      auto-as-set: true
+      announce-communities: [ "34553,15" ]
+      remove-all-communities: 34553
+      local-pref: 100
+      import-communities: [ "34553,14" ]
+
+    downstream:
+      filter-irr: true
+      allow-blackhole-community: true
+      filter-transit-asns: true
+      auto-import-limits: true
+      auto-as-set: true
+      announce-communities: [ "34553,15" ]
+      announce-default: true
+      remove-all-communities: 34553
+      local-pref: 200
+      import-communities: [ "34553,15" ]

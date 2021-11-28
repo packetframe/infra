@@ -31,7 +31,7 @@
 
 - name: Set default release
   copy:
-    content: "APT::Default-Release \"{{ config.controlplane.versions.debian }}\";"
+    content: "APT::Default-Release \"{{ controlplane_versions.debian }}\";"
     dest: /etc/apt/apt.conf.d/default-release
 
 - name: Check if sources.list.d is empty
@@ -58,9 +58,9 @@
 - name: Install utilities
   apt:
     pkg:
-      - mtr-tiny={{ config.edge.versions.apt.mtr }}
-      - rsync={{ config.edge.versions.apt.rsync }}
-      - knot-dnsutils={{ config.edge.versions.apt["knot-dnsutils"] }}
+      - mtr-tiny={{ edge_versions.apt.mtr }}
+      - rsync={{ edge_versions.apt.rsync }}
+      - knot-dnsutils={{ edge_versions.apt["knot-dnsutils"] }}
     state: present
 
 - name: Remove old packages

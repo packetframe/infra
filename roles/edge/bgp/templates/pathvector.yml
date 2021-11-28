@@ -1,2 +1,2 @@
-{{ config.edge.bgp | to_nice_yaml }}
+{{ edge_bgp | to_nice_yaml }}
 {{ bgp | to_nice_yaml }}
