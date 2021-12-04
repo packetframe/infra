@@ -16,3 +16,15 @@ scrape_configs:
         labels:
           node: {{ host }}
 {% endfor %}
+
+  - job_name: "verfploeter"
+    metric_relabel_configs:
+      - source_labels: [ "__name__" ]
+        regex: "^(go).*$"
+        action: drop
+    static_configs:
+{% for host in groups["edge"] %}
+      - targets: ["{{ hostvars[host]['ansible_host'] }}:9918"]
+        labels:
+          node: {{ host }}
+{% endfor %}
