@@ -1,0 +1,34 @@
+- name: Create verfploeter group
+  group:
+    name: verfploeter
+    state: present
+
+- name: Create verfploeter user
+  user:
+    name: verfploeter
+    groups: verfploeter
+    shell: /sbin/nologin
+
+- name: Install verfploeter
+  apt:
+    deb: "https://github.com/natesales/go-verfploeter/releases/download/v{{ edge_versions.apt['go-verfploeter'] }}/go-verfploeter-{{ edge_versions.apt['go-verfploeter'] }}-linux-amd64.deb"
+    state: present
+
+- name: Copy verfploeter.service
+  template:
+    src: verfploeter.service
+    dest: /lib/systemd/system/verfploeter.service
+  register: verfploeter_config
+
+- name: Enable and start verfploeter
+  systemd:
+    daemon_reload: true
+    name: verfploeter
+    state: started
+    enabled: true
+
+- name: Restart verfploeter
+  systemd:
+    name: verfploeter
+    state: restarted
+  when: verfploeter_config.changed

@@ -7,3 +7,4 @@ edge_versions:
     mtr: 0.94-1+deb11u1
     rsync: 3.2.3-4+deb11u1
     knot-dnsutils: 3.0.5-1
+    go-verfploeter: 0.0.1
