@@ -18,10 +18,16 @@
     pkg:
       - gnupg2
       - apt-transport-https
+      - ca-certificates
 
 - name: Add Pathvector GPG key
   apt_key:
     url: https://repo.pathvector.io/pgp.asc
+    state: present
+
+- name: Add knot GPG key
+  apt_key:
+    url: https://deb.knot-dns.cz/apt.gpg
     state: present
 
 - name: Copy source.list
@@ -91,6 +97,7 @@
     state: restarted
   when: sshd_config.changed
 
+# TODO: Make this run on boot
 - name: Copy net.sh
   template:
     src: net.sh

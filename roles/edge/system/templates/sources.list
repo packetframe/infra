@@ -1,9 +1,10 @@
-deb https://deb.debian.org/debian/ {{ controlplane_versions.debian }} main contrib
-deb-src https://deb.debian.org/debian/ {{ controlplane_versions.debian }}-updates main contrib
+deb https://deb.debian.org/debian/ {{ edge_versions.debian }} main contrib
+deb-src https://deb.debian.org/debian/ {{ edge_versions.debian }}-updates main contrib
 
-deb https://security.debian.org/debian-security {{ controlplane_versions.debian }}-security main
-deb-src https://security.debian.org/debian-security {{ controlplane_versions.debian }}-security main
+deb https://security.debian.org/debian-security {{ edge_versions.debian }}-security main
+deb-src https://security.debian.org/debian-security {{ edge_versions.debian }}-security main
 
-deb https://deb.debian.org/debian {{ controlplane_versions.debian }}-backports main contrib
+deb https://deb.debian.org/debian {{ edge_versions.debian }}-backports main contrib
 
 deb https://repo.pathvector.io/apt/ stable main
+deb https://deb.knot-dns.cz/knot-latest/ {{ edge_versions.debian }} main

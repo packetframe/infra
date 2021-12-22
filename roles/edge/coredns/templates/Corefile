@@ -1,8 +1,0 @@
-(pf_default) {
-  nsid {{ inventory_hostname }}
-  reload 10s
-  prometheus {{ ansible_host }}:9253
-  bind 66.248.234.2 66.248.234.3 2602:809:3004::2 2602:809:3004::3
-}
-
-import /opt/packetframe/dns/Corefile.zones

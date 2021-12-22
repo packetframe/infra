@@ -1,0 +1,17 @@
+- name: Install knot
+  apt:
+    update-cache: true
+    pkg:
+      - knot={{ edge_versions.apt.knot }}
+
+- name: Copy knot.conf
+  template:
+    src: knot.conf
+    dest: /etc/knot/knot.conf
+  register: knot_conf
+
+- name: Reload knot
+  systemd:
+    name: knot
+    state: restarted
+  when: knot_conf.changed
