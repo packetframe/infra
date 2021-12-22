@@ -1,11 +1,13 @@
 - name: Edge install
-  hosts: fmt2
+  hosts: edge
   vars_files:
     - config/edge-bgp.yml
+    - config/controlplane-versions.yml
     - config/edge-versions.yml
   roles:
     - role: "./roles/common/firewall"
     - role: "./roles/common/auth"
     - role: "./roles/edge/coredns"
     - role: "./roles/edge/system"
+    - role: "./roles/edge/verfploeter"
     - role: "./roles/edge/bgp"
