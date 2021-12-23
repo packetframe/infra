@@ -7,7 +7,7 @@
   roles:
     - role: "./roles/common/firewall"
     - role: "./roles/common/auth"
-    - role: "./roles/edge/coredns"
     - role: "./roles/edge/system"
+    - role: "./roles/edge/knot"
     - role: "./roles/edge/verfploeter"
     - role: "./roles/edge/bgp"
