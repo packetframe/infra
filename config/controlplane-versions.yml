@@ -1,9 +1,9 @@
 controlplane_versions:
   debian: bullseye
   docker:
-    api: 0.0.36 # Also covers orchestrator
+    api: 0.0.37 # Also covers orchestrator
     postgres: 14.1-bullseye
     caddy: 2.4.6-alpine
     prometheus: 2.31.1
   archives:
-    web: 0.0.15
+    web: 0.0.16
