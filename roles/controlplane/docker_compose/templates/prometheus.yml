@@ -9,10 +9,10 @@ scrape_configs:
           - api:8081
           - orchestrator:8081
 
-  - job_name: "coredns"
+  - job_name: "knot"
     static_configs:
 {% for host in groups["edge"] %}
-      - targets: ["{{ hostvars[host]['ansible_host'] }}:9253"]
+      - targets: ["{{ hostvars[host]['ansible_host'] }}:9433"]
         labels:
           node: {{ host }}
 {% endfor %}
