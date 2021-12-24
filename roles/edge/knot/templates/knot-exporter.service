@@ -1,0 +1,16 @@
+[Unit]
+Description=Prometheus exporter for Knot DNS
+Documentation=https://github.com/ghedo/knot_exporter
+After=knot.service
+Requires=knot.service
+
+[Service]
+Restart=always
+User=knot
+Group=knot
+ExecStart=/usr/local/bin/knot_exporter --knot-library-path /usr/lib/x86_64-linux-gnu/libknot.so.12 --web-listen-addr {{ ansible_host }} --web-listen-port 9433
+TimeoutStopSec=20s
+SendSIGKILL=no
+
+[Install]
+WantedBy=multi-user.target

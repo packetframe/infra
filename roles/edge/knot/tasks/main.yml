@@ -3,6 +3,7 @@
     update-cache: true
     pkg:
       - knot={{ edge_versions.apt.knot }}
+      - python3-pip={{ edge_versions.apt["python3-pip"] }}
 
 - name: Copy knot.conf
   template:
@@ -15,3 +16,34 @@
     name: knot
     state: restarted
   when: knot_conf.changed
+
+- name: Install prometheus client
+  pip:
+    executable: /usr/bin/pip3
+    name: prometheus_client
+
+- name: Copy knot_exporter.py
+  template:
+    src: knot_exporter.py
+    dest: /usr/local/bin/knot_exporter
+    mode: +x
+  register: knot_exporter
+
+- name: Copy knot-exporter.service
+  template:
+    src: knot-exporter.service
+    dest: /lib/systemd/system/knot-exporter.service
+  register: knot_exporter_service
+
+- name: Start knot-exporter
+  systemd:
+    daemon-reload: true
+    name: knot-exporter
+    state: started
+    enabled: true
+
+- name: Restart knot-exporter
+  systemd:
+    name: knot-exporter
+    state: restarted
+  when: knot_exporter.changed or knot_exporter_service.changed
