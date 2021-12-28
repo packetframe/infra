@@ -11,6 +11,12 @@
     dest: /etc/knot/knot.conf
   register: knot_conf
 
+- name: Create empty zones file if it doesn't exist
+  copy:
+    content: ""
+    dest: /opt/packetframe/dns/knot.zones.conf
+    force: no
+
 - name: Reload knot
   systemd:
     name: knot

@@ -97,6 +97,13 @@
     state: restarted
   when: sshd_config.changed
 
+- name: Create datastore directories
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - /opt/packetframe/dns/zones/
+
 # TODO: Make this run on boot
 - name: Copy net.sh
   template:
@@ -108,10 +115,3 @@
 - name: Apply network configuration
   shell: /opt/packetframe/net.sh
   when: net_sh.changed
-
-- name: Create datastore directories
-  file:
-    path: "{{ item }}"
-    state: directory
-  loop:
-    - /opt/packetframe/dns/zones/
