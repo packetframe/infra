@@ -6,6 +6,9 @@ edge_bgp: # Content of this key is inserted before the node specific peers block
     - 2602:809:3004::/48
   default-route: false
   accept-default: true
+  portal-host: "{{ config.edge.portal.host }}"
+  portal-key: "{{ config.edge.portal.key }}"
+  hostname: "edge1.{{ inventory_hostname }}"
   templates:
     upstream:
       allow-local-as: true
@@ -13,7 +16,7 @@ edge_bgp: # Content of this key is inserted before the node specific peers block
       remove-all-communities: 34553
       local-pref: 80
       import-communities: [ "34553,12" ]
-      filter-prefix-length: false # TODO: Fix https://github.com/natesales/pathvector/issues/61
+      filter-prefix-length: false
 
     routeserver:
       filter-transit-asns: true
