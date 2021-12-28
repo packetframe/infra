@@ -69,6 +69,17 @@
       - knot-dnsutils={{ edge_versions.apt["knot-dnsutils"] }}
     state: present
 
+- name: Create pfservice group
+  group:
+    name: pfservice
+    state: present
+
+- name: Create pfservice user
+  user:
+    name: pfservice
+    groups: pfservice
+    shell: /sbin/nologin
+
 - name: Remove old packages
   apt:
     pkg:

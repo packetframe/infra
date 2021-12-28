@@ -1,0 +1,10 @@
+[Unit]
+Description=Node Exporter
+
+[Service]
+User=pfservice
+Group=pfservice
+ExecStart=/usr/local/bin/node_exporter --web.listen-address="{{ ansible_host }}:9100"
+
+[Install]
+WantedBy=multi-user.target

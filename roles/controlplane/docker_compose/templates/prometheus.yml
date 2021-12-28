@@ -9,10 +9,26 @@ scrape_configs:
           - api:8081
           - orchestrator:8081
 
+  - job_name: "node"
+    static_configs:
+{% for host in groups["edge"] %}
+      - targets: ["{{ hostvars[host]['ansible_host'] }}:9100"]
+        labels:
+          node: {{ host }}
+{% endfor %}
+
   - job_name: "knot"
     static_configs:
 {% for host in groups["edge"] %}
       - targets: ["{{ hostvars[host]['ansible_host'] }}:9433"]
+        labels:
+          node: {{ host }}
+{% endfor %}
+
+  - job_name: "bird"
+    static_configs:
+{% for host in groups["edge"] %}
+      - targets: ["{{ hostvars[host]['ansible_host'] }}:9324"]
         labels:
           node: {{ host }}
 {% endfor %}

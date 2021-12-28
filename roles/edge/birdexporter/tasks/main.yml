@@ -1,0 +1,25 @@
+- name: Download bird-exporter
+  unarchive:
+    src: "https://github.com/czerwonk/bird_exporter/releases/download/{{ edge_versions.archive['bird-exporter'] }}/bird_exporter_{{ edge_versions.archive['bird-exporter'] }}_linux_amd64.tar.gz"
+    remote_src: yes
+    dest: /usr/local/bin/
+  register: bird_exporter_download
+
+- name: Copy bird-exporter.service
+  template:
+    src: bird-exporter.service
+    dest: /lib/systemd/system/bird-exporter.service
+  register: bird_exporter_config
+
+- name: Enable and start bird-exporter
+  systemd:
+    daemon_reload: true
+    name: bird-exporter
+    state: started
+    enabled: true
+
+- name: Restart bird-exporter
+  systemd:
+    name: bird-exporter
+    state: restarted
+  when: bird_exporter_config.changed

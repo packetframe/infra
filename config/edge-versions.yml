@@ -6,6 +6,9 @@ edge_versions:
     mtr: 0.94-1+deb11u1
     rsync: 3.2.3-4+deb11u1
     knot-dnsutils: 3.1.5-cznic.1~bullseye
-    go-verfploeter: 0.0.2
     knot: 3.1.5-cznic.1~bullseye
     python3-pip: 20.3.4-4
+  archive:
+    node-exporter: 1.3.1
+    go-verfploeter: 0.0.2
+    bird-exporter: 1.2.6 # https://github.com/czerwonk/bird_exporter/releases/tag/1.2.6

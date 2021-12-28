@@ -1,0 +1,10 @@
+[Unit]
+Description=BIRD Exporter
+
+[Service]
+User=pfservice
+Group=pfservice
+ExecStart=/usr/local/bin/bird_exporter -bird.v2 -proto.ospf=false -web.listen-address="{{ ansible_host }}:9324"
+
+[Install]
+WantedBy=multi-user.target
