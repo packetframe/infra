@@ -6,5 +6,6 @@ controlplane_versions:
     caddy: 2.4.6-alpine
     prometheus: 2.31.1
     grafana: 8.3.3
+    bifocal: 0.0.1
   archives:
     web: 0.0.22

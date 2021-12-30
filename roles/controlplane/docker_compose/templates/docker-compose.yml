@@ -52,6 +52,18 @@ services:
       - POSTGRES_PASSWORD=api
       - POSTGRES_DB=api
 
+  bifocal:
+    image: "ghcr.io/natesales/bifocal:{{ controlplane_versions.docker.bifocal }}"
+    environment:
+      BIFOCAL_SSH_USERNAME: "{{ config.ring.username }}"
+      BIFOCAL_SSH_KEY: |
+        {{ config.ring.key | indent(width=8) }}
+      BIFOCAL_SMTP_HOST: "{{ config.email.host }}"
+      BIFOCAL_SMTP_PORT: "{{ config.email.port }}"
+      BIFOCAL_SMTP_USERNAME: "{{ config.email.username }}"
+      BIFOCAL_SMTP_PASSWORD: "{{ config.email.password }}"
+      BIFOCAL_EMAIL_RECIPIENT: "{{ config.email.recipient }}"
+
   prometheus:
     image: "prom/prometheus:v{{ controlplane_versions.docker.prometheus }}"
     user: root
