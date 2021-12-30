@@ -63,6 +63,8 @@ services:
       BIFOCAL_SMTP_USERNAME: "{{ config.email.username }}"
       BIFOCAL_SMTP_PASSWORD: "{{ config.email.password }}"
       BIFOCAL_EMAIL_RECIPIENT: "{{ config.email.recipient }}"
+      BIFOCAL_INTERVAL: 5m
+      BIFOCAL_SCRIPT: https://raw.githubusercontent.com/packetframe/infra/main/roles/controlplane/bifocal-check.sh
 
   prometheus:
     image: "prom/prometheus:v{{ controlplane_versions.docker.prometheus }}"
