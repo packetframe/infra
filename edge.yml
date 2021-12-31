@@ -10,4 +10,6 @@
     - role: "./roles/edge/system"
     - role: "./roles/edge/knot"
     - role: "./roles/edge/verfploeter"
+    - role: "./roles/edge/nodeexporter"
+    - role: "./roles/edge/birdexporter"
     - role: "./roles/edge/bgp"
