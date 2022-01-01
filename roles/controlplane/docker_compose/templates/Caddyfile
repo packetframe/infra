@@ -2,7 +2,7 @@
   email info@packetframe.com
 }
 
-v4.packetframe.com {
+packetframe.com {
   root * /etc/caddy/public/
   file_server
   encode gzip
