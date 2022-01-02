@@ -4,28 +4,17 @@
 
 DIG_COMMAND="dig +time=5 +tries=1 +nsid CH id.server TXT"
 MTR_COMMAND="mtr --show-ips --report-wide --aslookup"
-TARGET4="66.248.234.2"
-TARGET6="2602:809:3004::2"
 PROMPT="$"
 
-dig4=$($DIG_COMMAND @"$TARGET4")
-RESULT=$?
-mtr4=$($MTR_COMMAND $TARGET6 2>&1)
-if ! [ $RESULT -eq 0 ] && ! [[ "$mtr4" =~ .*"Network is unreachable".* ]]; then
-  echo "$PROMPT $DIG_COMMAND @$TARGET4"
-  echo "$dig4"
-  echo
-  echo "$PROMPT $MTR_COMMAND $TARGET4"
-  eval $MTR_COMMAND $TARGET4
-fi
-
-dig6=$($DIG_COMMAND @"$TARGET6")
-RESULT=$?
-mtr6=$($MTR_COMMAND $TARGET6 2>&1)
-if ! [ $RESULT -eq 0 ] && ! [[ "$mtr6" =~ .*"Network is unreachable".* ]]; then
-  echo "$PROMPT $DIG_COMMAND @$TARGET6"
-  echo "$dig6"
-  echo
-  echo "$PROMPT $MTR_COMMAND $TARGET6"
-  eval "$MTR_COMMAND" $TARGET6
-fi
+for target in 66.248.234.2 66.248.234.3 2602:809:3004::2 2602:809:3004::3; do
+  dig_result=$($DIG_COMMAND @"$target")
+  RESULT=$?
+  mtr_result=$($MTR_COMMAND $target 2>&1)
+  if ! [ $RESULT -eq 0 ] && ! [[ "$mtr_result" =~ .*"Network is unreachable".* ]]; then
+    echo "$PROMPT $DIG_COMMAND @$target"
+    echo "$dig_result"
+    echo
+    echo "$PROMPT $MTR_COMMAND $target"
+    echo "$mtr_result"
+  fi
+done
