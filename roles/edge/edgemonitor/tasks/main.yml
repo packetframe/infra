@@ -1,0 +1,28 @@
+- name: Install ssmtp
+  apt:
+    pkg:
+      - ssmtp={{ edge_versions.apt.ssmtp }}
+
+- name: Copy ssmtp.conf
+  template:
+    src: ssmtp.conf
+    dest: /etc/ssmtp/ssmtp.conf
+
+- name: Copy alert-email.sh
+  template:
+    src: alert-email.sh
+    dest: /usr/local/bin/alert-email
+    mode: +x
+
+- name: Copy edgemonitor.sh
+  template:
+    src: edgemonitor.sh
+    dest: /usr/local/bin/edge-monitor
+    mode: +x
+
+- name: Add crontab entry
+  cron:
+    name: edgemonitor
+    user: root
+    job: /usr/local/bin/edge-monitor
+    minute: "*"

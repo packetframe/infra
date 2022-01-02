@@ -12,6 +12,7 @@
     - role: "./roles/edge/verfploeter"
     - role: "./roles/edge/nodeexporter"
     - role: "./roles/edge/birdexporter"
+    - role: "./roles/edge/edgemonitor"
     - role: "./roles/edge/bgp"
 
 - name: Bootstrap nodes
