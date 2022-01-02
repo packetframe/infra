@@ -18,3 +18,4 @@
   hosts: controlplane
   roles:
     - role: "./roles/controlplane/bootstrap_nodes"
+      nodes: "{{ groups['edge'] }}"

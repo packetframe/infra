@@ -9,7 +9,7 @@
       -e "ssh -o StrictHostKeyChecking=no -p {{ config.edge.ssh.port }} -i ~/.ssh/packetframe" \
       /opt/packetframe/docker/orchestrator_cache/zones/ \
       root@{{ hostvars[item]['ansible_host'] }}:/opt/packetframe/dns/zones/
-  loop: "{{ groups['edge'] }}"
+  loop: "{{ nodes }}"
 
 - name: Copy zone manifest
   shell: |
@@ -22,9 +22,9 @@
       -e "ssh -o StrictHostKeyChecking=no -p {{ config.edge.ssh.port }} -i ~/.ssh/packetframe" \
       /opt/packetframe/docker/orchestrator_cache/knot.zones.conf \
       root@{{ hostvars[item]['ansible_host'] }}:/opt/packetframe/dns/knot.zones.conf
-  loop: "{{ groups['edge'] }}"
+  loop: "{{ nodes }}"
 
 - name: Reload knot
   shell: |
     ssh -o StrictHostKeyChecking=no -p {{ config.edge.ssh.port }} -i ~/.ssh/packetframe root@{{ hostvars[item]['ansible_host'] }} systemctl reload knot
-  loop: "{{ groups['edge'] }}"
+  loop: "{{ nodes }}"
