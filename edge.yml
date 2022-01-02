@@ -19,3 +19,4 @@
   roles:
     - role: "./roles/controlplane/bootstrap_nodes"
       nodes: "{{ groups['edge'] }}"
+    - role: "./roles/controlplane/docker_compose"
