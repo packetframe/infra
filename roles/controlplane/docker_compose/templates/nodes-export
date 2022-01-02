@@ -1,0 +1,3 @@
+{% for host in groups["edge"] %}
+{{ host }} {{ hostvars[host]["node_id"] }} {{ hostvars[host]["peeringdb_fac"] }}
+{% endfor %}

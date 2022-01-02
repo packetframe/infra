@@ -47,6 +47,11 @@
     dest: /opt/packetframe/docker/caddy/public/
     remote_src: yes
 
+- name: Copy nodes-export
+  template:
+    src: nodes-export
+    dest: /opt/packetframe/docker/caddy/public/nodes-export
+
 - name: Bring docker-compose up
   docker_compose:
     project_src: /opt/packetframe/docker/
