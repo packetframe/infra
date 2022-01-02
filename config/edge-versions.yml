@@ -1,7 +1,7 @@
 edge_versions:
   debian: bullseye
   apt:
-    pathvector: 5.8.0
+    pathvector: 5.9.1
     bird2: 2.0.8-2~bpo11+1
     mtr: 0.94-1+deb11u1
     rsync: 3.2.3-4+deb11u1
