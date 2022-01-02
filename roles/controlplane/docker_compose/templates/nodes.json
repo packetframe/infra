@@ -1,0 +1,10 @@
+[
+  {% for host in groups["edge"] %}
+{
+    "name": "{{ host }}",
+    "id": {{ hostvars[host]["node_id"] }},
+    "pdb": {{ hostvars[host]["peeringdb_fac"] }}
+  }{% if not loop.last %},{% endif %}
+
+  {% endfor %}
+]

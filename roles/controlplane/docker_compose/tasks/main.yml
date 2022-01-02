@@ -1,59 +1,59 @@
-- name: Create datastore directories
-  file:
-    path: "{{ item }}"
-    state: directory
-  loop:
-    - /opt/packetframe/docker/api_db/
-    - /opt/packetframe/docker/caddy/public/
-    - /opt/packetframe/docker/caddy/data/
-    - /opt/packetframe/docker/prometheus/data/
-    - /opt/packetframe/docker/grafana/data/
-    - /opt/packetframe/docker/orchestrator_cache/zones/
+#- name: Create datastore directories
+#  file:
+#    path: "{{ item }}"
+#    state: directory
+#  loop:
+#    - /opt/packetframe/docker/api_db/
+#    - /opt/packetframe/docker/caddy/public/
+#    - /opt/packetframe/docker/caddy/data/
+#    - /opt/packetframe/docker/prometheus/data/
+#    - /opt/packetframe/docker/grafana/data/
+#    - /opt/packetframe/docker/orchestrator_cache/zones/
+#
+#- name: Copy docker-compose file
+#  template:
+#    src: docker-compose.yml
+#    dest: /opt/packetframe/docker/docker-compose.yml
+#
+#- name: Copy Caddyfile
+#  template:
+#    src: Caddyfile
+#    dest: /opt/packetframe/docker/caddy/Caddyfile
+#
+#- name: Copy prometheus.yml
+#  template:
+#    src: prometheus.yml
+#    dest: /opt/packetframe/docker/prometheus/prometheus.yml
+#  register: prometheus_config
+#
+#- name: Reload prometheus
+#  shell: docker-compose -f /opt/packetframe/docker/docker-compose.yml restart prometheus
+#  when: prometheus_config.changed
+#
+#- name: Copy nodes.yml
+#  template:
+#    src: nodes.yml
+#    dest: /opt/packetframe/docker/nodes.yml
+#
+#- name: Create empty log file
+#  copy:
+#    content: ""
+#    force: no # Only create if the file doesn't exist
+#    dest: /opt/packetframe/docker/caddy/log.txt
+#
+#- name: Download frontend
+#  unarchive:
+#    src: "https://github.com/packetframe/web/releases/download/v{{ controlplane_versions.archives.web }}/packetframe-web-v{{ controlplane_versions.archives.web }}.tar.gz"
+#    dest: /opt/packetframe/docker/caddy/public/
+#    remote_src: yes
 
-- name: Copy docker-compose file
+- name: Copy nodes.json
   template:
-    src: docker-compose.yml
-    dest: /opt/packetframe/docker/docker-compose.yml
+    src: nodes.json
+    dest: /opt/packetframe/docker/caddy/public/nodes.json
 
-- name: Copy Caddyfile
-  template:
-    src: Caddyfile
-    dest: /opt/packetframe/docker/caddy/Caddyfile
-
-- name: Copy prometheus.yml
-  template:
-    src: prometheus.yml
-    dest: /opt/packetframe/docker/prometheus/prometheus.yml
-  register: prometheus_config
-
-- name: Reload prometheus
-  shell: docker-compose -f /opt/packetframe/docker/docker-compose.yml restart prometheus
-  when: prometheus_config.changed
-
-- name: Copy nodes.yml
-  template:
-    src: nodes.yml
-    dest: /opt/packetframe/docker/nodes.yml
-
-- name: Create empty log file
-  copy:
-    content: ""
-    force: no # Only create if the file doesn't exist
-    dest: /opt/packetframe/docker/caddy/log.txt
-
-- name: Download frontend
-  unarchive:
-    src: "https://github.com/packetframe/web/releases/download/v{{ controlplane_versions.archives.web }}/packetframe-web-v{{ controlplane_versions.archives.web }}.tar.gz"
-    dest: /opt/packetframe/docker/caddy/public/
-    remote_src: yes
-
-- name: Copy nodes-export
-  template:
-    src: nodes-export
-    dest: /opt/packetframe/docker/caddy/public/nodes-export
-
-- name: Bring docker-compose up
-  docker_compose:
-    project_src: /opt/packetframe/docker/
-    files:
-      - docker-compose.yml
+#- name: Bring docker-compose up
+#  docker_compose:
+#    project_src: /opt/packetframe/docker/
+#    files:
+#      - docker-compose.yml
