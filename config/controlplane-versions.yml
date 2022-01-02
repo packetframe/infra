@@ -8,4 +8,4 @@ controlplane_versions:
     grafana: 8.3.3
     bifocal: 0.0.3
   archives:
-    web: 0.0.25
+    web: 0.0.27
