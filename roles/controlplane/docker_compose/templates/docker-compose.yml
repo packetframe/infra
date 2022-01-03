@@ -33,7 +33,7 @@ services:
     volumes:
       - /opt/packetframe/docker/orchestrator_cache/:/data
       - /root/.ssh/packetframe:/ssh-key
-      - /opt/packetframe/docker/nodes.yml:/nodes.yml
+      - /opt/packetframe/docker/nodes.yml:/nodes.yml:ro
     depends_on:
       - api_db
     environment:
