@@ -23,6 +23,9 @@ services:
       - DB_HOST=api_db
       - METRICS_LISTEN=:8081
       - RPC_SERVER=http://orchestrator:8080
+      - SMTP_HOST={{ config.email.host }}
+      - SMTP_USER={{ config.email.username }}
+      - SMTP_PASS={{ config.email.password }}
 
   orchestrator:
     image: "ghcr.io/packetframe/orchestrator:{{ controlplane_versions.docker.api }}"
