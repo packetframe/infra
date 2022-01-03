@@ -44,8 +44,8 @@ services:
       - SSH_KEY_FILE=/ssh-key
       - SSH_PORT={{ config.edge.ssh.port }}
       - NODE_FILE=/nodes.yml
-      - NS1_HOSTNAME=ns1v4
-      - NS2_HOSTNAME=ns2v4
+      - NS1_HOSTNAME=ns1
+      - NS2_HOSTNAME=ns2
 
   api_db:
     image: "postgres:{{ controlplane_versions.docker.postgres }}"
