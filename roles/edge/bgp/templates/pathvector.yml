@@ -15,7 +15,7 @@ templates:
     remove-all-communities: 34553
     local-pref: 80
     import-communities: [ "34553,12" ]
-    export-communities: [ "34553,33,{{ node_id }}" ]
+    export-communities: [ "34553:33:{{ node_id }}" ]
     filter-prefix-length: false
 
   routeserver:
@@ -26,7 +26,7 @@ templates:
     announce-communities: [ "34553,15" ]
     remove-all-communities: 34553
     local-pref: 90
-    export-communities: [ "34553,33,{{ node_id }}" ]
+    export-communities: [ "34553:33:{{ node_id }}" ]
     import-communities: [ "34553,13" ]
 
   peer:
@@ -37,7 +37,7 @@ templates:
     announce-communities: [ "34553,15" ]
     remove-all-communities: 34553
     local-pref: 100
-    export-communities: [ "34553,33,{{ node_id }}" ]
+    export-communities: [ "34553:33:{{ node_id }}" ]
     import-communities: [ "34553,14" ]
 
   downstream:
@@ -50,7 +50,7 @@ templates:
     announce-default: true
     remove-all-communities: 34553
     local-pref: 200
-    export-communities: [ "34553,33,{{ node_id }}" ]
+    export-communities: [ "34553:33:{{ node_id }}" ]
     import-communities: [ "34553,15" ]
 
 {{ bgp | to_nice_yaml }}
