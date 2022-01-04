@@ -1,0 +1,5 @@
+- name: Download frontend
+  unarchive:
+    src: "https://github.com/packetframe/web/releases/download/v{{ controlplane_versions.archives.web }}/packetframe-web-v{{ controlplane_versions.archives.web }}.tar.gz"
+    dest: /opt/packetframe/docker/caddy/public/
+    remote_src: yes

@@ -6,3 +6,4 @@
     - role: "./roles/common/firewall"
     - role: "./roles/common/install_docker"
     - role: "./roles/controlplane/docker_compose"
+    - role: "./roles/controlplane/deploy_web"
