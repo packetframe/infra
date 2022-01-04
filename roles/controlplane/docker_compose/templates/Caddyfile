@@ -22,6 +22,6 @@ packetframe.com {
   }
 }
 
-grafana.v4.packetframe.com {
+grafana.packetframe.com {
   reverse_proxy http://grafana:3000
 }
