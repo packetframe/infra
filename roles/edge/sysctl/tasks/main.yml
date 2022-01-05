@@ -1,0 +1,9 @@
+- name: Copy sysctl.conf
+  template:
+    src: sysctl.conf
+    dest: /etc/sysctl.conf
+  register: sysctl_conf
+
+- name: Apply sysctl.conf
+  shell: sysctl -p
+  when: sysctl_conf.changed

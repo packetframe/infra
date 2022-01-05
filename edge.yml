@@ -14,6 +14,7 @@
     - role: "./roles/common/firewall"
     - role: "./roles/common/auth"
     - role: "./roles/edge/system"
+    - role: "./roles/edge/sysctl"
     - role: "./roles/edge/knot"
     - role: "./roles/edge/verfploeter"
     - role: "./roles/edge/nodeexporter"
