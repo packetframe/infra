@@ -1,5 +1,6 @@
 - name: Install BGP packages
   apt:
+    update_cache: true
     pkg:
       - bird2={{ edge_versions.apt.bird2 }}
       - pathvector={{ edge_versions.apt.pathvector }}
@@ -18,6 +19,6 @@
   cron:
     name: Pathvector generate
     user: root
-    job: pathvector generate
+    job: /usr/local/bin/pathvector generate
     minute: 0
     hour: "*/12"
