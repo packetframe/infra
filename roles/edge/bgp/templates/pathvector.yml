@@ -23,7 +23,12 @@ templates:
     import-communities: [ "34553,12" ]
     export-communities: [ "34553:33:{{ node_id }}" ]
     filter-prefix-length: false
-
+    pre-export: | # Rewrite AS path for AS112 prefixes
+      if (net ~ [192.175.48.0/24, 192.31.196.0/24] || net ~ [2620:4f:8000::/48, 2001:4:112::/48]) then {
+        bgp_path.empty;
+        bgp_path.prepend(112);
+        bgp_path.prepend(34553);
+      }
   routeserver:
     filter-transit-asns: true
     auto-import-limits: true
@@ -59,4 +64,4 @@ templates:
     export-communities: [ "34553:33:{{ node_id }}" ]
     import-communities: [ "34553,15" ]
 
-  { { bgp | to_nice_yaml } }
+{{ bgp | to_nice_yaml }}
