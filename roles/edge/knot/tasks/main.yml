@@ -11,6 +11,19 @@
     dest: /etc/knot/knot.conf
   register: knot_conf
 
+- name: Make /etc/knot/as112/ directory
+  file:
+    path: /etc/knot/as112/
+    state: directory
+
+- name: Copy AS112 zone files
+  template:
+    src: "{{ item }}"
+    dest: /etc/knot/as112/{{ item | basename }}
+  with_fileglob:
+    - ../templates/as112/*
+  register: as112_zones
+
 - name: Create empty zones file if it doesn't exist
   copy:
     content: ""
@@ -21,7 +34,7 @@
   systemd:
     name: knot
     state: restarted
-  when: knot_conf.changed
+  when: knot_conf.changed or as112_zones.changed
 
 - name: Install prometheus client
   pip:

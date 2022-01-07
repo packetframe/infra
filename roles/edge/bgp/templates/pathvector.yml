@@ -1,8 +1,14 @@
 asn: 34553
 router-id: 66.248.234.1
 prefixes:
+  # Packetframe
   - 66.248.234.0/24
   - 2602:809:3004::/48
+  # AS112
+  - 192.175.48.0/24
+  - 192.31.196.0/24
+  - 2620:4f:8000::/48
+  - 2001:4:112::/48
 default-route: false
 accept-default: true
 portal-host: "{{ config.edge.portal.host }}"
@@ -53,4 +59,4 @@ templates:
     export-communities: [ "34553:33:{{ node_id }}" ]
     import-communities: [ "34553,15" ]
 
-{{ bgp | to_nice_yaml }}
+  { { bgp | to_nice_yaml } }
