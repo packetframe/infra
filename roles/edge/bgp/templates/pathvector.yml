@@ -39,7 +39,12 @@ templates:
     local-pref: 90
     export-communities: [ "34553:33:{{ node_id }}" ]
     import-communities: [ "34553,13" ]
-
+    pre-export: | # Rewrite AS path for AS112 prefixes
+      if (net ~ [192.175.48.0/24, 192.31.196.0/24] || net ~ [2620:4f:8000::/48, 2001:4:112::/48]) then {
+        bgp_path.empty;
+        bgp_path.prepend(112);
+        bgp_path.prepend(34553);
+      }
   peer:
     filter-irr: true
     filter-transit-asns: true
@@ -50,7 +55,12 @@ templates:
     local-pref: 100
     export-communities: [ "34553:33:{{ node_id }}" ]
     import-communities: [ "34553,14" ]
-
+    pre-export: | # Rewrite AS path for AS112 prefixes
+      if (net ~ [192.175.48.0/24, 192.31.196.0/24] || net ~ [2620:4f:8000::/48, 2001:4:112::/48]) then {
+        bgp_path.empty;
+        bgp_path.prepend(112);
+        bgp_path.prepend(34553);
+      }
   downstream:
     filter-irr: true
     allow-blackhole-community: true
@@ -63,5 +73,11 @@ templates:
     local-pref: 200
     export-communities: [ "34553:33:{{ node_id }}" ]
     import-communities: [ "34553,15" ]
+    pre-export: | # Rewrite AS path for AS112 prefixes
+      if (net ~ [192.175.48.0/24, 192.31.196.0/24] || net ~ [2620:4f:8000::/48, 2001:4:112::/48]) then {
+        bgp_path.empty;
+        bgp_path.prepend(112);
+        bgp_path.prepend(34553);
+      }
 
 {{ bgp | to_nice_yaml }}
