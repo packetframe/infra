@@ -22,3 +22,10 @@
     job: /usr/local/bin/pathvector generate
     minute: 0
     hour: "*/12"
+
+- name: Add portal crontab entry
+  cron:
+    name: Pathvector portal update
+    user: root
+    job: /usr/local/bin/pathvector portal-update
+    minute: "*/15"

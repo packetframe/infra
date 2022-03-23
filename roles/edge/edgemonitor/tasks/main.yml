@@ -1,17 +1,17 @@
-- name: Install ssmtp
-  apt:
-    pkg:
-      - ssmtp={{ edge_versions.apt.ssmtp }}
+#- name: Install ssmtp
+#  apt:
+#    pkg:
+#      - ssmtp={{ edge_versions.apt.ssmtp }}
+#
+#- name: Copy ssmtp.conf
+#  template:
+#    src: ssmtp.conf
+#    dest: /etc/ssmtp/ssmtp.conf
 
-- name: Copy ssmtp.conf
+- name: Copy betteruptime-incident.py
   template:
-    src: ssmtp.conf
-    dest: /etc/ssmtp/ssmtp.conf
-
-- name: Copy alert-email.sh
-  template:
-    src: alert-email.sh
-    dest: /usr/local/bin/alert-email
+    src: betteruptime-incident.py
+    dest: /usr/local/bin/betteruptime-incident
     mode: +x
 
 - name: Copy edgemonitor.sh
@@ -19,10 +19,10 @@
     src: edgemonitor.sh
     dest: /usr/local/bin/edge-monitor
     mode: +x
-
-- name: Add crontab entry
-  cron:
-    name: edgemonitor
-    user: root
-    job: /usr/local/bin/edge-monitor
-    minute: "*"
+#
+#- name: Add crontab entry
+#  cron:
+#    name: edgemonitor
+#    user: root
+#    job: /usr/local/bin/edge-monitor
+#    minute: "*"
