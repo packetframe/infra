@@ -21,9 +21,3 @@
     - role: "./roles/edge/birdexporter"
     - role: "./roles/edge/edgemonitor"
     - role: "./roles/edge/bgp"
-
-- name: Bootstrap nodes
-  hosts: controlplane
-  roles:
-    - role: "./roles/controlplane/bootstrap_nodes"
-      nodes: "{{ groups['edge'] }}"

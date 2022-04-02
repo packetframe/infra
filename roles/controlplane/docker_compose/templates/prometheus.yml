@@ -7,7 +7,6 @@ scrape_configs:
     static_configs:
       - targets:
           - api:8081
-          - orchestrator:8081
 
   - job_name: "node"
     static_configs:

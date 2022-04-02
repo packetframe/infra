@@ -8,7 +8,6 @@
     - /opt/packetframe/docker/caddy/data/
     - /opt/packetframe/docker/prometheus/data/
     - /opt/packetframe/docker/grafana/data/
-    - /opt/packetframe/docker/orchestrator_cache/zones/
 
 - name: Copy docker-compose file
   template:
