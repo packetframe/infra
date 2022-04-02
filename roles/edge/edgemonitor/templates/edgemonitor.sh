@@ -22,5 +22,5 @@ if $withdraw; then
   fi
   touch /tmp/edgemonitor.node-disabled
 else
-  rm /tmp/edgemonitor.node-disabled
+  rm -f /tmp/edgemonitor.node-disabled
 fi
