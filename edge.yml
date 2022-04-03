@@ -12,6 +12,7 @@
     - config/edge-versions.yml
   roles:
     - role: "./roles/common/firewall"
+    - role: "./roles/edge/wireguard"
     - role: "./roles/common/auth"
     - role: "./roles/edge/system"
     - role: "./roles/edge/sysctl"

@@ -1,0 +1,15 @@
+- name: Install wireguard
+  apt:
+    pkg:
+      - wireguard
+
+- name: Copy client config
+  template:
+    src: wg-core.conf.j2
+    dest: /etc/wireguard/wg-core.conf
+
+- name: Enable and start service
+  systemd:
+    name: wg-quick@wg-core
+    state: started
+    enabled: true

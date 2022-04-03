@@ -1,0 +1,8 @@
+[Interface]
+Address = 172.16.90.{{ node_id }}/24
+PrivateKey = {{ wg.priv }}
+
+[Peer]
+PublicKey = {{ config.core_wg.publ }}
+AllowedIPs = 172.16.90.0/24
+Endpoint = {{ config.core_wg.host }}:{{ config.core_wg.port }}

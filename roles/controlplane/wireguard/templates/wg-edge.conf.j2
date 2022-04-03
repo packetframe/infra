@@ -1,0 +1,11 @@
+[Interface]
+Address = 172.16.90.1/32
+PrivateKey = {{ config["core_wg"]["priv"] }}
+ListenPort = {{ config["core_wg"]["port"] }}
+
+{% for host in groups["edge"] %}
+[Peer]
+PublicKey = {{ hostvars[host]["wg"]["publ"] }}
+AllowedIPs = 172.16.90.{{ hostvars[host]["node_id"] }}/32
+
+{% endfor %}
