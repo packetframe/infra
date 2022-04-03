@@ -25,6 +25,7 @@ services:
       - SMTP_HOST={{ config.email.host }}
       - SMTP_USER={{ config.email.username }}
       - SMTP_PASS={{ config.email.password }}
+      - SENTRY_DSN={{ config.sentry_dsn }}
 
   api_db:
     image: "postgres:{{ controlplane_versions.docker.postgres }}"
@@ -37,17 +38,6 @@ services:
       - POSTGRES_USER=api
       - POSTGRES_PASSWORD=api
       - POSTGRES_DB=api
-
-  edged:
-    image: "ghcr.io/packetframe/edged:{{ controlplane_versions.docker.api }}"
-    restart: unless-stopped
-    depends_on:
-      - api_db
-    entrypoint: /usr/bin/edged
-    command: --db-host api_db --rpc-listen :8053 --dns-listen :53 --refresh 5s
-    ports:
-      - 53:53/udp
-      - 53:53/tcp
 
   bifocal:
     image: "ghcr.io/natesales/bifocal:{{ controlplane_versions.docker.bifocal }}"

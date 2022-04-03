@@ -14,4 +14,5 @@
     - role: "./roles/edge/nodeexporter"
     - role: "./roles/edge/birdexporter"
     - role: "./roles/edge/edgemonitor"
+    - role: "./roles/edge/edged"
     - role: "./roles/edge/bgp"
