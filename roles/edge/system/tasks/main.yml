@@ -115,13 +115,23 @@
   loop:
     - /opt/packetframe/dns/zones/
 
-# TODO: Make this run on boot
 - name: Copy net.sh
   template:
     src: net.sh
     dest: /opt/packetframe/net.sh
     mode: +x
   register: net_sh
+
+- name: Copy oneshot net start service
+  template:
+    src: pf-net.service
+    dest: /etc/systemd/system/pf-net.service
+
+- name: Start and enable pf-net service
+  systemd:
+    name: pf-net
+    state: started
+    enabled: true
 
 - name: Apply network configuration
   shell: /opt/packetframe/net.sh

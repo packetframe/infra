@@ -1,0 +1,10 @@
+[Unit]
+Description=Packetframe Net
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/packetframe/net.sh
+
+[Install]
+WantedBy=multi-user.target
