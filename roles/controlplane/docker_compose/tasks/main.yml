@@ -29,11 +29,6 @@
   shell: docker-compose -f /opt/packetframe/docker/docker-compose.yml restart prometheus
   when: prometheus_config.changed
 
-- name: Copy nodes.yml
-  template:
-    src: nodes.yml
-    dest: /opt/packetframe/docker/nodes.yml
-
 - name: Create empty log file
   copy:
     content: ""

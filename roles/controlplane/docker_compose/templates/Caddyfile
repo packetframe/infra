@@ -13,7 +13,6 @@ packetframe.com {
   }
 
   log {
-    # TODO: The resulting log file on the host system is empty
     output file /var/log/caddy.log {
       roll_size 1gb
       roll_keep 1

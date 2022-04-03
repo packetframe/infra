@@ -1,10 +1,3 @@
-- name: Update controlplane nodes
-  hosts: controlplane
-  vars_files:
-    - config/controlplane-versions.yml
-  roles:
-    - role: "./roles/controlplane/docker_compose"
-
 - name: Edge install
   hosts: edge
   vars_files:

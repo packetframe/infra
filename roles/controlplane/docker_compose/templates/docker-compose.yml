@@ -30,7 +30,7 @@ services:
     image: "postgres:{{ controlplane_versions.docker.postgres }}"
     restart: unless-stopped
     ports:
-      - 127.0.0.1:5432:5432
+      - 172.16.90.1:5432:5432
     volumes:
       - /opt/packetframe/docker/api_db:/var/lib/postgresql/data
     environment:
