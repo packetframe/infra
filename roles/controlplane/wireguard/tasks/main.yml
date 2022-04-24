@@ -13,3 +13,6 @@
     name: wg-quick@wg-edge
     state: started
     enabled: true
+
+- name: Reload configuration
+  shell: 'bash -c "wg syncconf wg-edge <(wg-quick strip wg-edge)"'
