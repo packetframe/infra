@@ -1,15 +1,14 @@
 edge_versions:
   debian: bullseye
   apt:
-    pathvector: 5.9.1
+    pathvector: 5.11.1
     bird2: 2.0.8-2~bpo11+1
     mtr: 0.94-1+deb11u1
     rsync: 3.2.3-4+deb11u1
-    knot-dnsutils: 3.1.5-cznic.1~bullseye
-    knot: 3.1.5-cznic.1~bullseye
+    knot-dnsutils: 3.1.7-cznic.1~bullseye
+    knot: 3.1.7-cznic.1~bullseye
     python3-pip: 20.3.4-4
-    ssmtp: 2.64-10
   archive:
     node-exporter: 1.3.1
     go-verfploeter: 0.0.2
-    bird-exporter: 1.2.6 # https://github.com/czerwonk/bird_exporter/releases/tag/1.2.6
+    bird-exporter: 1.4.1 # https://github.com/czerwonk/bird_exporter/releases/latest
