@@ -1,13 +1,3 @@
-#- name: Install ssmtp
-#  apt:
-#    pkg:
-#      - ssmtp={{ edge_versions.apt.ssmtp }}
-#
-#- name: Copy ssmtp.conf
-#  template:
-#    src: ssmtp.conf
-#    dest: /etc/ssmtp/ssmtp.conf
-
 - name: Copy betteruptime-incident.py
   template:
     src: betteruptime-incident.py
