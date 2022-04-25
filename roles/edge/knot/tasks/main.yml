@@ -3,7 +3,7 @@
     update-cache: true
     pkg:
       - knot={{ edge_versions.apt.knot }}
-      - python3-pip={{ edge_versions.apt["python3-pip"] }}
+      - python3-pip
 
 - name: Copy knot.conf
   template:
