@@ -54,6 +54,23 @@ services:
       BIFOCAL_INTERVAL: 5m
       BIFOCAL_SCRIPT: https://raw.githubusercontent.com/packetframe/infra/main/roles/controlplane/bifocal-check.sh
 
+  vertex_db:
+    image: "postgres:{{ controlplane_versions.docker.postgres }}"
+    restart: unless-stopped
+    volumes:
+      - /opt/packetframe/docker/vertex_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=vertex
+      - POSTGRES_PASSWORD=vertex
+      - POSTGRES_DB=vertex
+
+  vertex:
+    image: "ghcr.io/packetframe/vertex:{{ controlplane_versions.docker.vertex }}"
+    restart: unless-stopped
+    environment:
+      DB_DSN: "host=vertex_db user=vertex password=vertex dbname=vertex port=5432 sslmode=disable"
+      SENTRY_DSN: "{{ config.sentry.vertex }}"
+
   prometheus:
     image: "prom/prometheus:v{{ controlplane_versions.docker.prometheus }}"
     restart: unless-stopped
