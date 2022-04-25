@@ -1,0 +1,4 @@
+- name: Copy bashrc
+  template:
+    src: dotbashrc
+    dest: /root/.bashrc
