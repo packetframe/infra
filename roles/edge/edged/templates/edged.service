@@ -3,6 +3,8 @@ Description=Packetframe Edge Daemon
 
 [Service]
 User=root
+Restart=on-failure
+RestartSec=5
 ExecStart=/usr/bin/edged -db-host 172.16.90.1 -dns-listen 66.248.234.6:53 -zone-refresh 1s -script-refresh 1s
 
 [Install]
