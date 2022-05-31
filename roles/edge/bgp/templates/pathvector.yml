@@ -11,8 +11,8 @@ prefixes:
 #  - 2001:4:112::/48
 default-route: false
 accept-default: true
-portal-host: "{{ config.edge.portal.host }}"
-portal-key: "{{ config.edge.portal.key }}"
+#portal-host: "{{ config.edge.portal.host }}"
+#portal-key: "{{ config.edge.portal.key }}"
 hostname: "edge1.{{ inventory_hostname }}"
 templates:
   upstream:
