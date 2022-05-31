@@ -1,0 +1,33 @@
+- name: Install libconfig-dev
+  apt:
+    name: libconfig-dev
+    state: present
+
+- name: Install xdpfw
+  apt:
+    deb: "https://github.com/packetframe/XDP-Firewall/releases/download/v{{ edge_versions.archive['xdpfw'] }}/xdpfw_{{ edge_versions.archive['xdpfw'] }}_amd64.deb"
+    state: present
+
+- name: Copy vertexd.sh script
+  template:
+    src: vertexd.sh
+    dest: /usr/local/bin/vertexd
+    mode: 0755
+
+- name: Copy vertexd.service
+  template:
+    src: vertexd.service
+    dest: /etc/systemd/system/vertexd.service
+
+- name: Enable and start vertexd
+  service:
+    daemon_reload: true
+    name: vertexd
+    enabled: yes
+    state: started
+
+- name: Enable and start xdpfw
+  service:
+    name: xdpfw
+    enabled: yes
+    state: started

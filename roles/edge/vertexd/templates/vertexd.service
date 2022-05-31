@@ -1,0 +1,9 @@
+[Unit]
+Description=Packetframe vertex rule manager
+
+[Service]
+User=root
+ExecStart=/usr/local/bin/vertexd
+
+[Install]
+WantedBy=multi-user.target
