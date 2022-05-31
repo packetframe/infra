@@ -15,4 +15,4 @@
     enabled: true
 
 - name: Reload configuration
-  shell: 'bash -c "wg syncconf wg-edge <(wg-quick strip wg-edge)"'
+  shell: 'bash -c "wg syncconf wg-core <(wg-quick strip wg-core)"'
