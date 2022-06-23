@@ -12,6 +12,10 @@ packetframe.com {
     reverse_proxy api:8080
   }
 
+  route /nodes.json {
+    header Access-Control-Allow-Origin *
+  }
+
   log {
     output file /var/log/caddy.log {
       roll_size 1gb
