@@ -64,9 +64,9 @@
 - name: Install utilities
   apt:
     pkg:
-      - mtr-tiny={{ edge_versions.apt.mtr }}
-      - rsync={{ edge_versions.apt.rsync }}
-      - knot-dnsutils={{ edge_versions.apt["knot-dnsutils"] }}
+      - mtr-tiny
+      - rsync
+      - knot-dnsutils
     state: present
 
 - name: Create pfservice group
