@@ -1,7 +1,7 @@
 edge_versions:
   debian: bullseye
   apt:
-    pathvector: 5.11.1
+    pathvector: 5.12.0
     bird2: 2.0.8-2~bpo11+1
   archive:
     node-exporter: 1.3.1

@@ -9,4 +9,4 @@ controlplane_versions:
     bifocal: 0.0.3
     vertex: 0.0.7
   archives:
-    web: 0.0.71
+    web: 0.0.72
