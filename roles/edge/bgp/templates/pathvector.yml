@@ -4,6 +4,8 @@ prefixes:
   # Packetframe
   - 66.248.234.0/24
   - 2602:809:3004::/48
+  - 66.248.235.0/24
+  - 2602:809:3005::/48
   # AS112
 #  - 192.175.48.0/24
 #  - 192.31.196.0/24
@@ -85,6 +87,7 @@ templates:
 
     lg.as34553.net:
       asn: 34553
+      multihop: true
       add-path-tx: true
       mp-unicast-46: true
       announce-communities: [ "968:10:12", "968:10:13", "968:10:14", "968:10:15" ]
