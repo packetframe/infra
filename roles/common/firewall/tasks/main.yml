@@ -9,6 +9,12 @@
     src: "{{ item }}"
   loop: "{{ config.root_acl }}"
 
+- name: Allow looking glass BGP
+  ufw:
+    rule: allow
+    src: "{{ config.lg }}"
+    port: 179
+
 - name: Allow control plane ports
   ufw:
     rule: allow

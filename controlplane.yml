@@ -9,3 +9,8 @@
     - role: "./roles/controlplane/wireguard"
     - role: "./roles/controlplane/docker_compose"
     - role: "./roles/controlplane/deploy_web"
+
+- name: LG update
+  hosts: lg
+  roles:
+    - role: "./roles/controlplane/lg"

@@ -1,0 +1,9 @@
+- name: Copy peers.conf
+  template:
+    src: peers.conf
+    dest: /etc/bird/peers.conf
+  register: lg_peers
+
+- name: Reload bird
+  shell: birdc conf
+  when: lg_peers.changed
