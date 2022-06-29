@@ -1,4 +1,4 @@
-asn: 34553
+asn: 968
 router-id: 66.248.234.1
 prefixes:
   # Packetframe
@@ -14,52 +14,53 @@ accept-default: true
 #portal-host: "{{ config.edge.portal.host }}"
 #portal-key: "{{ config.edge.portal.key }}"
 hostname: "edge1.{{ inventory_hostname }}"
+peeringdb-api-key: "{{ config.edge.peeringdb_api_key }}"
 templates:
   upstream:
     allow-local-as: true
-    announce-communities: [ "34553,15" ]
-    remove-all-communities: 34553
+    announce-communities: [ "968:10:15" ]
+    remove-all-communities: 968
     local-pref: 80
-    import-communities: [ "34553,12" ]
-    export-communities: [ "34553:33:{{ node_id }}" ]
+    import-communities: [ "968:10:12" ]
+    export-communities: [ "968:33:{{ node_id }}" ]
     filter-prefix-length: false
     pre-export: | # Rewrite AS path for AS112 prefixes
       if (net ~ [192.175.48.0/24, 192.31.196.0/24] || net ~ [2620:4f:8000::/48, 2001:4:112::/48]) then {
         bgp_path.empty;
         bgp_path.prepend(112);
-        bgp_path.prepend(34553);
+        bgp_path.prepend(968);
       }
   routeserver:
     filter-transit-asns: true
     auto-import-limits: true
     enforce-peer-nexthop: false
     enforce-first-as: false
-    announce-communities: [ "34553,15" ]
-    remove-all-communities: 34553
+    announce-communities: [ "968:10:15" ]
+    remove-all-communities: 968
     local-pref: 90
-    export-communities: [ "34553:33:{{ node_id }}" ]
-    import-communities: [ "34553,13" ]
+    export-communities: [ "968:33:{{ node_id }}" ]
+    import-communities: [ "968:10:13" ]
     pre-export: | # Rewrite AS path for AS112 prefixes
       if (net ~ [192.175.48.0/24, 192.31.196.0/24] || net ~ [2620:4f:8000::/48, 2001:4:112::/48]) then {
         bgp_path.empty;
         bgp_path.prepend(112);
-        bgp_path.prepend(34553);
+        bgp_path.prepend(968);
       }
   peer:
     filter-irr: true
     filter-transit-asns: true
     auto-import-limits: true
     auto-as-set: true
-    announce-communities: [ "34553,15" ]
-    remove-all-communities: 34553
+    announce-communities: [ "968:10:15" ]
+    remove-all-communities: 968
     local-pref: 100
-    export-communities: [ "34553:33:{{ node_id }}" ]
-    import-communities: [ "34553,14" ]
+    export-communities: [ "968:33:{{ node_id }}" ]
+    import-communities: [ "968:10:14" ]
     pre-export: | # Rewrite AS path for AS112 prefixes
       if (net ~ [192.175.48.0/24, 192.31.196.0/24] || net ~ [2620:4f:8000::/48, 2001:4:112::/48]) then {
         bgp_path.empty;
         bgp_path.prepend(112);
-        bgp_path.prepend(34553);
+        bgp_path.prepend(968);
       }
   downstream:
     filter-irr: true
@@ -67,17 +68,26 @@ templates:
     filter-transit-asns: true
     auto-import-limits: true
     auto-as-set: true
-    announce-communities: [ "34553,15" ]
+    announce-communities: [ "968:10:15" ]
     announce-default: true
-    remove-all-communities: 34553
+    remove-all-communities: 968
     local-pref: 200
-    export-communities: [ "34553:33:{{ node_id }}" ]
-    import-communities: [ "34553,15" ]
+    export-communities: [ "968:33:{{ node_id }}" ]
+    import-communities: [ "968:10:15" ]
     pre-export: | # Rewrite AS path for AS112 prefixes
       if (net ~ [192.175.48.0/24, 192.31.196.0/24] || net ~ [2620:4f:8000::/48, 2001:4:112::/48]) then {
         bgp_path.empty;
         bgp_path.prepend(112);
-        bgp_path.prepend(34553);
+        bgp_path.prepend(968);
       }
 
 {{ bgp | to_nice_yaml }}
+
+    lg.as34553.net:
+      asn: 34553
+      add-path-tx: true
+      mp-unicast-46: true
+      announce-communities: [ "968:10:12", "968:10:13", "968:10:14", "968:10:15" ]
+      pre-import: reject;
+      neighbors:
+        - "{{ config.lg }}"
