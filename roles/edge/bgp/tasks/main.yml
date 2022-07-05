@@ -23,6 +23,7 @@
     minute: 0
     hour: "*/12"
 
+# TODO: Remove this
 - name: Add portal crontab entry
   cron:
     name: Pathvector portal update

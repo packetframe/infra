@@ -1,0 +1,38 @@
+- name: Install pfcaddy
+  apt:
+    deb: "https://github.com/packetframe/pfcaddy/releases/download/v{{ edge_versions.archive['pfcaddy'] }}/pfcaddy.deb"
+    state: present
+
+- name: Copy caddy.service
+  template:
+    src: caddy.service
+    dest: /etc/systemd/system/caddy.service
+  register: caddy_service
+
+- name: Check if Caddyfile exists
+  stat:
+    path: /etc/caddy/Caddyfile
+  register: stat_result
+  failed_when: false
+
+- name: Create /etc/caddy
+  file:
+      path: /etc/caddy
+      state: directory
+  when: not stat_result.stat.exists
+
+- name: Create empty Caddyfile
+  copy:
+    content: |
+      http://localhost {
+        respond OK
+      }
+    dest: /etc/caddy/Caddyfile
+  when: not stat_result.stat.exists
+
+- name: Start and enable caddy
+  systemd:
+    name: caddy
+    state: started
+    enabled: true
+    daemon_reload: true

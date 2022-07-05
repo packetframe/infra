@@ -7,7 +7,7 @@
     - role: "./roles/common/firewall"
     - role: "./roles/common/install_docker"
 
-- name: Control plane install
+- name: Control plane update
   hosts: controlplane
   vars_files:
     - config/controlplane-versions.yml
