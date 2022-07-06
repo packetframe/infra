@@ -7,10 +7,12 @@ ip addr add dev local 66.248.234.3/24 # ns2
 ip addr add dev local 2602:809:3004::3/48 # ns2
 ip addr add dev local 66.248.234.5/24 # Verfploeter
 ip addr add dev local 2602:809:3004::5/48 # Verfploeter
-ip addr add dev local 66.248.234.6/24 # SCRIPT
-ip addr add dev local 2602:809:3004::6/48 # SCRIPT
-ip addr add dev local 66.248.234.7/24 # HTTP
-ip addr add dev local 2602:809:3004::7/48 # HTTP
+ip addr add dev local 66.248.234.6/24 # SCRIPT DNS
+ip addr add dev local 2602:809:3004::6/48 # SCRIPT DNS
+{% if large %}
+ip addr add dev local 66.248.235.2/24 # HTTP
+ip addr add dev local 2602:809:3005::2/48 # HTTP
+{% endif %}
 
 # AS112
 # ip addr add dev local 192.175.48.1/24       #  prisoner.iana.org

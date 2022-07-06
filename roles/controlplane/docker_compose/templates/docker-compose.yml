@@ -75,6 +75,22 @@ services:
       DB_DSN: "host=vertex_db user=vertex password=vertex dbname=vertex port=5432 sslmode=disable"
       SENTRY_DSN: "{{ config.sentry.vertex }}"
 
+  acmed:
+    image: "ghcr.io/packetframe/acmed:{{ controlplane_versions.docker.api }}"
+    restart: unless-stopped
+    ports:
+      - 172.16.90.1:8081:8081
+    volumes:
+      - /opt/packetframe/docker/acmed/data/:/data
+    depends_on:
+      - api_db
+    environment:
+      CA: https://acme-v02.api.letsencrypt.org/directory
+      LISTEN: :8081
+      DATA_DIR: /data
+      DB_HOST: api_db
+      SENTRY_DSN: "{{ config.sentry.acmed }}"
+
   prometheus:
     image: "prom/prometheus:v{{ controlplane_versions.docker.prometheus }}"
     restart: unless-stopped

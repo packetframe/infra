@@ -115,6 +115,14 @@
   loop:
     - /opt/packetframe/dns/zones/
 
+- name: Create TLS cache
+  file:
+    path: "{{ item }}"
+    state: directory
+  loop:
+    - /opt/packetframe/certs/
+  when: large
+
 - name: Copy net.sh
   template:
     src: net.sh

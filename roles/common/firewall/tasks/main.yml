@@ -15,13 +15,21 @@
     src: "{{ config.lg }}"
     port: 179
 
-- name: Allow control plane ports
+- name: Allow HTTP(s)
   ufw:
     rule: allow
     port: "{{ item }}"
   loop:
     - 80
     - 443
+  when: ('controlplane' in group_names) or large
+
+- name: Allow edge to controlplane acmed on internal network
+  ufw:
+    rule: allow
+    src: 172.16.90.0/24
+    proto: tcp
+    port: 8081
   when: "'controlplane' in group_names"
 
 - name: Allow edge ports
