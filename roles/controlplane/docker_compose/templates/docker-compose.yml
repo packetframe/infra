@@ -92,7 +92,7 @@ services:
       SENTRY_DSN: "{{ config.sentry.acmed }}"
 
   httpgate-broker:
-    image: "ghcr.io/packetframe/httpgate-broker:latest"
+    image: "ghcr.io/packetframe/httpgate-broker:{{ controlplane_versions.docker.httpgate_broker }}"
     restart: unless-stopped
 
   prometheus:
