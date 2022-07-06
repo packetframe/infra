@@ -8,10 +8,14 @@ scrape_configs:
       - source_labels: [ "__name__" ]
         regex: "^(go).*$"
         action: drop
+      - source_labels: [ "__name__" ]
+        regex: "^(promhttp).*$"
+        action: drop
     static_configs:
       - targets:
         - api:8081
         - vertex:8081
+        - httpgate-broker:8081
 
   - job_name: "node"
     static_configs:

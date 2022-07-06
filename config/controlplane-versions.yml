@@ -1,7 +1,7 @@
 controlplane_versions:
   debian: bullseye
   docker:
-    api: 0.0.69
+    api: 0.0.70
     postgres: 14.1-bullseye
     caddy: 2.4.6-alpine
     prometheus: 2.31.1

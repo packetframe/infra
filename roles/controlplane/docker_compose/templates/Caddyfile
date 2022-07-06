@@ -28,3 +28,8 @@ packetframe.com {
 grafana.packetframe.com {
   reverse_proxy http://grafana:3000
 }
+
+httpgate-broker.packetframe.com {
+  tls internal
+  reverse_proxy http://httpgate-broker:8080
+}

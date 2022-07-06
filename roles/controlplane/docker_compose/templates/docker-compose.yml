@@ -91,6 +91,10 @@ services:
       DB_HOST: api_db
       SENTRY_DSN: "{{ config.sentry.acmed }}"
 
+  httpgate-broker:
+    image: "ghcr.io/packetframe/httpgate-broker:latest"
+    restart: unless-stopped
+
   prometheus:
     image: "prom/prometheus:v{{ controlplane_versions.docker.prometheus }}"
     restart: unless-stopped
