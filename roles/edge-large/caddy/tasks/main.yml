@@ -2,6 +2,7 @@
   apt:
     deb: "https://github.com/packetframe/pfcaddy/releases/download/v{{ edge_versions.archive['pfcaddy'] }}/pfcaddy.deb"
     state: present
+  register: caddy_install
 
 - name: Copy caddy.service
   template:
@@ -36,3 +37,9 @@
     state: started
     enabled: true
     daemon_reload: true
+
+- name: Restart caddy
+  systemd:
+    name: caddy
+    state: restarted
+  when: caddy_install.changed
