@@ -8,4 +8,4 @@ edge_versions:
     go-verfploeter: 0.0.2
     bird-exporter: 1.4.1 # https://github.com/czerwonk/bird_exporter/releases/latest
     xdpfw: 0.0.3 # https://github.com/packetframe/XDP-Firewall/releases/latest
-    pfcaddy: 0.0.10
+    pfcaddy: 0.0.11
