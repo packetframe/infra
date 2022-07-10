@@ -2,6 +2,7 @@
   apt:
     deb: "https://github.com/packetframe/api/releases/download/v{{ controlplane_versions.docker.api }}/edged_{{ controlplane_versions.docker.api }}_linux_amd64.deb"
     state: present
+  register: edged_install
 
 - name: Copy edged service
   template:
@@ -14,7 +15,7 @@
     name: edged
     daemon_reload: true
     state: restarted
-  when: edged_service.changed
+  when: edged_service.changed or edged_install.changed
 
 - name: Start and enable edged
   systemd:
