@@ -2,12 +2,25 @@
   apt:
     deb: "https://github.com/natesales/go-verfploeter/releases/download/v{{ edge_versions.archive['go-verfploeter'] }}/go-verfploeter-{{ edge_versions.archive['go-verfploeter'] }}-linux-amd64.deb"
     state: present
+  register: verfploeter_install
 
 - name: Copy verfploeter.service
   template:
     src: verfploeter.service
     dest: /lib/systemd/system/verfploeter.service
-  register: verfploeter_config
+  register: verfploeter_service
+
+- name: Copy verfploeter.yml
+  template:
+    src: verfploeter.yml
+    dest: /etc/verfploeter.yml
+  register: verfploeter_yml
+
+- name: Copy targets
+  template:
+    src: targets.txt
+    dest: /etc/verfploeter-targets.conf
+  register: verfploeter_targets
 
 - name: Disable and stop verfploeter
   systemd:
@@ -20,4 +33,4 @@
   systemd:
     name: verfploeter
     state: restarted
-  when: verfploeter_config.changed
+  when: verfploeter_install.changed or verfploeter_service.changed or verfploeter_yml.changed or verfploeter_targets.changed

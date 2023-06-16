@@ -52,3 +52,15 @@ scrape_configs:
         labels:
           node: {{ host }}
 {% endfor %}
+
+  - job_name: "fabric-director"
+    metric_relabel_configs:
+      - source_labels: [ "__name__" ]
+        regex: "^(go).*$"
+        action: drop
+    static_configs:
+{% for host in groups["edge"] %}
+      - targets: ["{{ hostvars[host]['ansible_host'] }}:9919"]
+        labels:
+          node: {{ host }}
+{% endfor %}

@@ -7,7 +7,8 @@ After=network.target
 CapabilityBoundingSet=CAP_NET_RAW
 AmbientCapabilities=CAP_NET_RAW
 User=pfservice
-ExecStart=/usr/local/bin/go-verfploeter -probe-interval 1h -source4 66.248.234.5 -source6 2602:809:3004::5 -icmp-id {{ node_id }} -metrics-addr {{ ansible_host }}:9918
+Group=pfservice
+ExecStart=/usr/bin/go-verfploeter -c /etc/verfploeter.yml -t /etc/verfploeter-targets.conf
 Restart=on-failure
 
 [Install]

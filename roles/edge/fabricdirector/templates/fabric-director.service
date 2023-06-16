@@ -1,0 +1,10 @@
+[Unit]
+Description=Packetframe Fabric Director
+
+[Service]
+User=root
+Group=root
+ExecStart=/usr/bin/fabric-director -c /etc/fabric-director.yml
+
+[Install]
+WantedBy=multi-user.target

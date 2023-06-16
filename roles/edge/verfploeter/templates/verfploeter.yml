@@ -1,0 +1,11 @@
+id: {{ node_id }}
+listen: {{ ansible_host }}:9918
+probe:
+  interval: 10s
+  source4: 66.248.234.5
+  source6: 2602:809:3004::5
+
+nodes:
+{% for host in groups["edge"] %}
+  {{ hostvars[host]['node_id'] }}: {{ host }}
+{% endfor %}
