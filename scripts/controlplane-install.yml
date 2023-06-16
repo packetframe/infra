@@ -1,0 +1,8 @@
+- name: Control plane install
+  hosts: controlplane
+  vars_files:
+    - ../config/controlplane-versions.yml
+  roles:
+    - role: "./roles/controlplane/bashrc"
+    - role: "./roles/common/firewall"
+    - role: "./roles/common/install_docker"

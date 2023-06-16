@@ -12,3 +12,12 @@ install host:
 
 jump host:
     ssh root@$(yq -r .hosts.children.edge.hosts.{{host}}.ansible_host hosts.yml) -p {{ssh_port}} -J vpn.fmt2 -i {{ssh_key_file}}
+
+controlplane-install:
+    ansible-playbook -i hosts.yml scripts/controlplane-install.yml
+
+controlplane-refresh:
+    ansible-playbook -i hosts.yml scripts/controlplane-refresh.yml
+
+lg-refresh:
+    ansible-playbook -i hosts.yml scripts/lg.yml

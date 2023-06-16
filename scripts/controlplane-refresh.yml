@@ -1,0 +1,8 @@
+- name: Control plane refresh
+  hosts: controlplane
+  vars_files:
+    - ../config/controlplane-versions.yml
+  roles:
+    - role: "./roles/controlplane/wireguard"
+    - role: "./roles/controlplane/docker_compose"
+    - role: "./roles/controlplane/deploy_web"

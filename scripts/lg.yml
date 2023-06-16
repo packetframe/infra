@@ -1,0 +1,4 @@
+- name: Looking glass refresh
+  hosts: lg
+  roles:
+    - role: "./roles/controlplane/lg"
