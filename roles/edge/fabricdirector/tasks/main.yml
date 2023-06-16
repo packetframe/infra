@@ -1,0 +1,30 @@
+- name: Install fabric-director
+  apt:
+    deb: "https://github.com/packetframe/fabric-director/releases/download/v{{ edge_versions.archive['fabric-director'] }}/fabric-director_{{ edge_versions.archive['fabric-director'] }}_linux_amd64.deb"
+    state: present
+  register: fabric_director_install
+
+- name: Copy fabric-director.service
+  template:
+    src: fabric-director.service
+    dest: /etc/systemd/system/fabric-director.service
+  register: fabric_director_service
+
+- name: Copy fabric-director.yml
+  template:
+    src: config.yml
+    dest: /etc/fabric-director.yml
+  register: fabric_director_yml
+
+- name: Disable and stop fabric-director
+  service:
+    daemon_reload: true
+    name: fabric-director
+    enabled: false
+    state: stopped
+
+#- name: Restart fabric-director
+#  service:
+#    name: fabric-director
+#    state: restarted
+#  when: fabric_director_install.changed or fabric_director_service.changed or fabric_director_yml.changed
