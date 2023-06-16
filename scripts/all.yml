@@ -1,8 +1,8 @@
-- name: Edge install
+- name: Install
   hosts: edge
   vars_files:
-    - config/controlplane-versions.yml
-    - config/edge-versions.yml
+    - ../config/controlplane-versions.yml
+    - ../config/edge-versions.yml
   roles:
     - role: "./roles/common/firewall"
     - role: "./roles/edge/wireguard"
@@ -16,4 +16,5 @@
     - role: "./roles/edge/edgemonitor"
     - role: "./roles/edge/edged"
     - role: "./roles/edge/vertexd"
+    - role: "./roles/edge/bgp-packages"
     - role: "./roles/edge/bgp"

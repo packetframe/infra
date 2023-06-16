@@ -19,15 +19,15 @@
     src: vertexd.service
     dest: /etc/systemd/system/vertexd.service
 
-- name: Enable and start vertexd
+- name: Disable and stop vertexd
   service:
     daemon_reload: true
     name: vertexd
-    enabled: yes
-    state: started
+    enabled: false
+    state: stopped
 
 - name: Enable and start xdpfw
   service:
     name: xdpfw
-    enabled: yes
-    state: started
+    enabled: false
+    state: stopped

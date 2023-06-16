@@ -9,12 +9,12 @@
     dest: /lib/systemd/system/verfploeter.service
   register: verfploeter_config
 
-- name: Enable and start verfploeter
+- name: Disable and stop verfploeter
   systemd:
     daemon_reload: true
     name: verfploeter
-    state: started
-    enabled: true
+    state: stopped
+    enabled: false
 
 - name: Restart verfploeter
   systemd:

@@ -1,0 +1,6 @@
+- name: Install BGP packages
+  apt:
+    update_cache: true
+    pkg:
+      - bird2={{ edge_versions.apt.bird2 }}
+      - pathvector={{ edge_versions.apt.pathvector }}

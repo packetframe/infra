@@ -1,7 +1,7 @@
 controlplane_versions:
   debian: bullseye
   docker:
-    api: 0.0.75
+    api: 0.0.76
     postgres: 14.1-bullseye
     caddy: 2.4.6-alpine
     prometheus: 2.31.1
@@ -9,5 +9,6 @@ controlplane_versions:
     bifocal: 0.0.3
     vertex: 0.0.7
     httpgate_broker: 0.0.4
+    fabricdirector: 0.0.1
   archives:
     web: 0.0.75
