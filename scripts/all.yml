@@ -16,5 +16,6 @@
     - role: "./roles/edge/edgemonitor"
     - role: "./roles/edge/edged"
     - role: "./roles/edge/vertexd"
+    - role: "./roles/edge/fabricdirector"
     - role: "./roles/edge/bgp-packages"
     - role: "./roles/edge/bgp"

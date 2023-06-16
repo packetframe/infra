@@ -1,0 +1,19 @@
+local-id: {{ node_id }}
+prefix4: 172.104
+prefix6: "fd55:104::"
+ping-interval: 1s
+loss-threshold: 0.01 # 1% packet loss
+listen: {{ ansible_host }}:9919
+latency-threshold: 20ms
+prefixes:
+  - 66.248.234.0/24
+  - 66.248.235.0/24
+  - 2602:809:3004::/48
+  - 2602:809:3005::/48
+
+nodes:
+{% for host in groups["edge"] %}
+  {{ host }}:
+    id: {{ hostvars[host]['node_id'] }}
+    ip: {{ hostvars[host]['ansible_host'] }}
+{% endfor %}
